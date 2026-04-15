@@ -1,0 +1,214 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;  /* Light background color */
+    margin: 0;
+    min-height: 100vh;
+    background-image: url('BG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(201, 200, 180, 0.7); 
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    height: 80px;
+    z-index: 10; 
+}
+
+.nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    width: 100%;
+}
+
+.nav a {
+    padding: 0 20px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.nav a:after{
+    content: "";
+    position:absolute;
+    background-color: chocolate;
+    height: 5px;
+    width: 0%;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+.nav a:hover{
+    background: chocolate;
+    padding: 5px;
+    border-radius: 2rem;
+    color: bisque;
+    transition:  0.5s ease;
+} 
+
+.nav .logo h1{ 
+   
+    font-size: 45px;
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(14, 13, 13);
+    
+}
+ 
+.nav .logo b{
+color: chocolate;                        ;
+}
+
+
+.nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.nav ul li{
+    
+    height: 50px;
+}
+.nav ul li a{
+    height: 100%;
+    display: flex;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 1000;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    align-items: center;
+    
+}
+
+/* ACTIVE */
+.nav ul .active::after{
+    content: '';
+    width: 50%;
+    height: 3px;
+    background-color: rgb(15, 14, 14);
+    display: flex;
+    position: relative;
+    margin-left: 10px;
+}
+
+
+
+/* Login Container */
+.login-container {
+    background-color: white;  /* Solid color background */
+    opacity: 0.8;  /* 80% opacity */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+
+/* Heading styling */
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form Group styling */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #ce871c;  /* Focus color */
+}
+
+/* Button styling */
+button[type="submit"] {
+    background-color: #ce871c;  /* Green background */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;  /* Hidden by default, shown if error occurs */
+}
+
+/* Link to signup page */
+.login-container p {
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.login-container a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+#googleBtn {
+    background-color: #4285F4;
+    color: white;
+}
+
+#fbLoginBtn {
+    background-color: #3b5998;
+    color: white;
+}

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu.js">
+    <title>MCCoffeeandTea</title>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <section class="menu">
+        <div class="nav">
+            <div class="logo"><h1>MC<b>Caffe</b></h1></div>
+            <ul>
+                <li><a href="#home" class="home-active">Home</a></li>
+                <li><a href="mpmenu.html">Menu</a></li>
+                <li><a href="#service">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Signup</a></li>
+                
+            </ul>
+        </div>
+    </section >
+
+     <main id="home">
+     <section class="grid">
+        <div class="content">
+            <div class="content-left">
+                <div class="info">
+                    <h2>Cravings?<br>Come get it at MC Coffee n' Tea</h2>
+                    <p>Savor the Moment: Treat Yourself</p>
+                </div>
+                <a href="mpmenu.html">
+                    <button>Explore Food<i class="fa-solid fa-arrow-right"></i></button>
+                </a>
+            </div>     
+            <sectio class="home swiper" id="home">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide container">
+                        <img src="ricebowlnobg.png" alt="">
+        
+                    </div>
+                    <div class="swiper-slide container">
+                        <img src="spameggsannobg.png" alt="">
+        
+                    </div>
+                    <div class="swiper-slide container">
+                        <img src="barkasanoBG.png" alt="">
+        
+                    </div>
+
+                    <div class="swiper-slide container">
+                        <img src="frappenobg.png" alt="">
+        
+                    </div>
+                    <div class="swiper-slide container">
+                        <img src="milk_teanobg.png" alt="">
+        
+                    </div>
+                    <div class="swiper-slide container">
+                        <img src="spanish_lattenobg.png" alt="">
+        
+                    </div>
+        
+        
+        
+                  </div>
+                  <div class="swiper-button-next"></div>
+                  <div class="swiper-button-prev"></div>
+        
+             </sectio>
+             
+             <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        
+             <script src="main.js"></script>
+         </section>
+    
+        </div>
+
+     <section class="category">
+        <div class="list-items">
+            <h3>Popular Order</h3>
+            <div class="card-list">
+                <div class="card">
+                    <img src="Cookiesandcream.jpg" alt="">
+                    <div class="food-title">
+                        <h1>Cookies and cream</h1>
+                    </div>
+                    <div class="price">
+                        <span>₱99 16oz ┃ ₱119 22oz  </span><span></span>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="matcha.jpg" alt="">
+                    <div class="food-title">
+                        <h1>Matcha Espresso</h1>
+                    </div>
+                    <div class="price">
+                        <span>₱79 16oz ┃ ₱99 22oz  </span><span></span>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="Sandwich.jpg" alt="">
+                    <div class="food-title">
+                        <h1>Cheesy Tuna Sandwich</h1>
+                    </div>
+                    <div class="price">
+                        <span>₱89  </span>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <img src="barkada.jpg" alt="">
+                    <div class="food-title">
+                        <h1>Barkada Meal</h1>
+                    </div>
+                    <div class="price">
+                        <span>₱279  </span><span></span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>  
+     </section>
+    </main>
+
+    <section class="menu" id="menu">
+        <div class="heading">
+            <h1>Browse Our Hottest <br><span>Menu</span></h1>
+                <a href="mpmenu.html">
+                    <button>See All <i class="fa-solid fa-arrow-right"></i></button>
+                </a>   
+            </div>
+            <div class="menu-container">
+                <div class="top-row">
+                    <div class="box box1" onclick="toggleMenu('menu1')">
+                        <img src="spanish latte.jpg" alt="Coffee">
+                        <h2>Coffee</h2>
+                        <span>8 Items</span>
+                        <a href="mpmenu.html#menu1">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box2" onclick="toggleMenu('menu2')">
+                        <img src="frappe.jpg" alt="Coffee Frappe">
+                        <h2>Coffee Frappe</h2>
+                        <span>6 Items</span>
+                        <a href="menu.html#menu2">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box3" onclick="toggleMenu('menu3')">
+                        <img src="milk tea.jpg" alt="Milk Tea">
+                        <h2>Milk Tea</h2>
+                        <span>10 Items</span>
+                        <a href="menu.html#menu3">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box4" onclick="toggleMenu('menu4')">
+                        <img src="fruit tea.jpg" alt="Fruit Tea">
+                        <h2>Fruit Tea</h2>
+                        <span>4 Items</span>
+                        <a href="mpmenu.html#menu4">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box5" onclick="toggleMenu('menu5')">
+                        <img src="noncoffe.jpg" alt="Placeholder">
+                        <h2>Non Coffee</h2>
+                        <span>4 Items</span>
+                        <a href="mpmenu.html#menu5">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="bottom-row">
+                    <div class="box box6" onclick="toggleMenu('menu6')">
+                        <img src="MGFrappe.jpg" alt="Non Coffee Frappe">
+                        <h2>Non Coffee Frappe</h2>
+                        <span>8 Items</span>
+                        <a href="mpmenu.html#menu6">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box7" onclick="toggleMenu('menu7')">
+                        <img src="foods.jpg" alt="Snacks">
+                        <h2>Snacks</h2>
+                        <span>6 Items</span>
+                        <a href="mpmenu.html#menu7">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box8" onclick="toggleMenu('menu8')">
+                        <img src="ricemeal.jpg" alt="Rice Bowl">
+                        <h2>Rice Bowl</h2>
+                        <span>2 Items</span>
+                        <a href="mpmenu.html#menu8">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box9" onclick="toggleMenu('menu9')">
+                        <img src="garlicTparme.jpg" alt="Pasta">
+                        <h2>Pasta</h2>
+                        <span>2 Items</span>
+                        <a href="mpmenu.html#menu9">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                    <div class="box box10" onclick="toggleMenu('menu10')">
+                        <img src="2pcchick.jpg" alt="2PC Chicken With Java Rice">
+                        <h2>2PC Chicken With Java Rice</h2>
+                        <span>8 Items</span>
+                        <a href="mpmenu.html#menu10">
+                            <button><i class="fa-solid fa-arrow-right"></i></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+        
+    
+        <div id="itemDetails" class="item-details" style="display: none;">
+            <span onclick="toggleItemDetails()" class="close">&times;</span>
+            <div id="itemContent"></div>
+        </div>
+    </section>
+    
+    
+    
+    <section class="services" id="service">
+        <div class="heading">
+            <h1>Our Services</h1>
+            <p>We offer a variety of delightful services to enhance your experience.</p>
+        </div>
+        <div class="service-container">
+            
+                <h2>Delivery</h2>
+                <p>Get your favorite meals delivered straight to your doorstep, quickly and safely. Our delivery service is available in a wide range of locations to ensure you enjoy our delicious meals no matter where you are.</p>
+                <ul>
+                    <li><strong>Fast and Reliable:</strong> We prioritize timely delivery so you can enjoy your food hot and fresh.</li>
+                    <li><strong>Easy Ordering:</strong> Simply browse our menu, place your order online, and relax while we bring your meal to you.</li>
+                    <li><strong>Track Your Order:</strong> Stay updated on your delivery status with real-time tracking for added convenience.</li>
+                    <li><strong>Secure Payment:</strong> Enjoy a smooth and secure online payment process with multiple payment options.</li>
+                    <li><strong>Support:</strong> Our customer support team is available to assist you with any delivery queries or concerns.</li>
+                </ul>
+    
+            
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <div class="heading">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you!</p>
+        </div>
+      
+            <form class="contact-form">
+                <a class="social" href="https://www.facebook.com/profile.php?id=61553252950268"><i class="fa-brands fa-facebook"></i>facebook</a>
+                <p>You can also contact us on Facebook</p>
+            </form>
+        </section>
+    </section>
+    
+    <section class="about" id="about-us">
+        <div class="heading">
+            <h1>About Us</h1>
+            <p>Learn more about our story and what drives us.</p>
+        </div>
+        <div class="about-content">
+            <p>At MC Caffe, we are passionate about delivering quality beverages and food. Our mission is to create a welcoming atmosphere where customers can relax and enjoy their favorite treats.</p>
+        </div>
+        <div class="loc">
+            <h1>LOCATION</h1>
+
+            <br></div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.1381809766654!2d121.06588807423888!3d14.873549770337553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397a9004df977b1%3A0x587167ec9bc05294!2sMC%20COFFEE%20N&#39;%20TEA!5e0!3m2!1sen!2sph!4v1730438094817!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    
+
+</body>
+</html>

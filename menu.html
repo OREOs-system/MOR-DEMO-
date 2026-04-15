@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menu.js">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="data.js">
+    <title>Menu</title>
+</head>
+<body>
+
+    <section class="menu">
+        <div class="nav">
+            <div class="logo"><h1>MC<b>Caffe</b></h1></div>
+            <ul>
+                <li><a href="mainpage.html" class="home-active">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="mainpage.html#service">Services</a></li>
+                <li><a href="mainpage.html#contact">Contact</a></li>
+                <li><a href="mainpage.html#about-us">About Us</a></li>
+                <li><a href="cart.html">
+                    <div class="cart">
+                      <i class="bi bi-cart"></i>
+                      <div id="cartAmount" class="cartAmount"> 0</div>
+                    </div>
+                  </a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </div>
+            
+
+    </section>
+    
+    
+    <div class="menu-container">
+    </section class="box" id="menu1">
+        <div class="box" id="menu1">
+          <h2>Coffee</h2>
+          <div class="menu-details">
+            <div class="item-box">
+                <img src="americano.webp" alt="Americano">
+                <h3>Americano</h3>
+                <p>Price: ₱55 12oz ┃ ₱65 16oz ┃ ₱85 22oz </p>
+                <label for="size-americano">Choose Size:</label>
+                <select id="size-americano">
+                    <option value="55">12 oz - ₱55</option>
+                    <option value="65">16 oz - ₱65</option>
+                    <option value="85">22 oz - ₱85</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-americano">
+                <button class="order-btn" onclick="addToCart('Americano', document.getElementById('quantity-americano').value, document.getElementById('size-americano').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="spanish latte.jpg" alt="Spanish Latte">
+                <h3>Spanish Latte</h3>
+                <p>Price: ₱65 12oz ┃ ₱70 16oz ┃ ₱90 22oz</p>
+                <label for="size-spanish-latte">Choose Size:</label>
+                <select id="size-spanish-latte">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="90">22 oz - ₱90</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-spanish-latte">
+                <button class="order-btn" onclick="addToCart('Spanish Latte', document.getElementById('quantity-spanish-latte').value, document.getElementById('size-spanish-latte').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="matchae.jpg" alt="Matcha Espresso">
+                <h3>Matcha Espresso</h3>
+                <p>Price: ₱60 12oz ┃ ₱70 16oz ┃ ₱90 22oz</p>
+                <label for="size-matcha-espresso">Choose Size:</label>
+                <select id="size-matcha-espresso">
+                    <option value="60">12 oz - ₱60</option>
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="90">22 oz - ₱90</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-matcha-espresso">
+                <button class="order-btn" onclick="addToCart('Matcha Espresso', document.getElementById('quantity-matcha-espresso').value, document.getElementById('size-matcha-espresso').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="iced caramel macchiato.jpg" alt="Caramel Macchiato">
+                <h3>Caramel Macchiato</h3>
+                <p>Price: ₱65 12oz ┃ ₱75 16oz ┃ ₱95 22oz</p>
+                <label for="size-caramel-macchiato">Choose Size:</label>
+                <select id="size-caramel-macchiato">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="75">16 oz - ₱75</option>
+                    <option value="95">22 oz - ₱95</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-caramel-macchiato">
+                <button class="order-btn" onclick="addToCart('Caramel Macchiato', document.getElementById('quantity-caramel-macchiato').value, document.getElementById('size-caramel-macchiato').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="hm.jpg" alt="Hazelnut Macchiato">
+                <h3>Hazelnut Macchiato</h3>
+                <p>Price: ₱65 12oz ┃ ₱75 16oz ┃ ₱95 22oz</p>
+                <label for="size-hazelnut-macchiato">Choose Size:</label>
+                <select id="size-hazelnut-macchiato">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="75">16 oz - ₱75</option>
+                    <option value="95">22 oz - ₱95</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-hazelnut-macchiato">
+                <button class="order-btn" onclick="addToCart('Hazelnut Macchiato', document.getElementById('quantity-hazelnut-macchiato').value, document.getElementById('size-hazelnut-macchiato').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="almondl.jpg " alt="Almond Latte">
+                <h3>Almond Latte</h3>
+                <p>Price: ₱60 12oz ┃ ₱70 16oz ┃ ₱90 22oz</p>
+                <label for="size-almond-latte">Choose Size:</label>
+                <select id="size-almond-latte">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="90">22 oz - ₱90</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-almond-latte">
+                <button class="order-btn" onclick="addToCart('Almond Latte', document.getElementById('quantity-almond-latte').value, document.getElementById('size-almond-latte').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="bl.jpg" alt="Butterscotch Latte">
+                <h3>Butterscotch Latte</h3>
+                <p>Price: ₱60 12oz ┃ ₱70 16oz ┃ ₱90 22oz</p>
+                <label for="size-butterscotch-latte">Choose Size:</label>
+                <select id="size-butterscotch-latte">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="90">22 oz - ₱90</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-butterscotch-latte">
+                <button class="order-btn" onclick="addToCart('Butterscotch Latte', document.getElementById('quantity-butterscotch-latte').value, document.getElementById('size-butterscotch-latte').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="item-box">
+                <img src="mll.jpg" alt="Mocha Latte">
+                <h3>Mocha Latte</h3>
+                <p>Price: ₱60 12oz ┃ ₱70 16oz ┃ ₱90 22oz</p>
+                <label for="size-mocha-latte">Choose Size:</label>
+                <select id="size-mocha-latte">
+                    <option value="65">12 oz - ₱65</option>
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="90">22 oz - ₱90</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-mocha-latte">
+                <button class="order-btn" onclick="addToCart('Mocha Latte', document.getElementById('quantity-mocha-latte').value, document.getElementById('size-mocha-latte').value)">Order</button>
+                <section class="coffee-choice">
+                    <h3>Would you like your coffee Hot or Iced?</h3>
+                    <div class="coffee-options">
+                        <label for="hot">
+                            <input type="radio" id="hot" name="coffee-type" value="hot">
+                            Hot Coffee
+                        </label>
+                        <label for="iced">
+                            <input type="radio" id="iced" name="coffee-type" value="iced">
+                            Iced Coffee
+                        </label>
+                    </div>
+                </section>
+            </div>
+        </div>      
+    </div>
+</section>
+
+</section class="box" id="menu2">
+    <div class="box" id="menu2">
+        <h2>Coffee Frappe</h2>
+        <div class="menu-details">
+            <div class="item-box">
+                <img src="javaF.jpg" alt="Java Chip">
+                <h3>Java Chip</h3>
+                <p>Price: ₱89 16oz ┃ ₱109 22oz</p>
+                <label for="size-java-chip">Choose Size:</label>
+                <select id="size-java-chip">
+                    <option value="89">16 oz - ₱89</option>
+                    <option value="109">22 oz - ₱109</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-JavaChip">
+                <button class="order-btn" onclick="addToCart('Java Chip', document.getElementById('quantity-JavaChip').value, document.getElementById('size-java-chip').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="buf.jpg" alt="Butterscotch">
+                <h3>Butterscotch</h3>
+                <p>Price: ₱79 16oz ┃ ₱99 22oz</p>
+                <label for="size-butterscotch">Choose Size:</label>
+                <select id="size-butterscotch">
+                    <option value="79">16 oz - ₱79</option>
+                    <option value="99">22 oz - ₱99</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Butterscotch">
+                <button class="order-btn" onclick="addToCart('Butterscotch', document.getElementById('quantity-Butterscotch').value, document.getElementById('size-butterscotch').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="almondf.jpg" alt="Almond Frappe">
+                <h3>Almond Frappe</h3>
+                <p>Price: ₱79 16oz ┃ ₱99 22oz</p>
+                <label for="size-almond-frappe">Choose Size:</label>
+                <select id="size-almond-frappe">
+                    <option value="79">16 oz - ₱79</option>
+                    <option value="99">22 oz - ₱99</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-AlmondFrappe">
+                <button class="order-btn" onclick="addToCart('Almond Frappe', document.getElementById('quantity-AlmondFrappe').value, document.getElementById('size-almond-frappe').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="hazelnutf.jpg" alt="Hazelnut Frappe">
+                <h3>Hazelnut Frappe</h3>
+                <p>Price: ₱79 16oz ┃ ₱99 22oz</p>
+                <label for="size-hazelnut-frappe">Choose Size:</label>
+                <select id="size-hazelnut-frappe">
+                    <option value="79">16 oz - ₱79</option>
+                    <option value="99">22 oz - ₱99</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-HazelnutFrappe">
+                <button class="order-btn" onclick="addToCart('Hazelnut Frappe', document.getElementById('quantity-HazelnutFrappe').value, document.getElementById('size-hazelnut-frappe').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="mfe.jpg" alt="Matcha Frappe">
+                <h3>Matcha Frappe</h3>
+                <p>Price: ₱79 16oz ┃ ₱99 22oz</p>
+                <label for="size-matcha-frappe">Choose Size:</label>
+                <select id="size-matcha-frappe">
+                    <option value="79">16 oz - ₱79</option>
+                    <option value="99">22 oz - ₱99</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-MatchaFrappe">
+                <button class="order-btn" onclick="addToCart('Matcha Frappe', document.getElementById('quantity-MatchaFrappe').value, document.getElementById('size-matcha-frappe').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="fpp.jpg" alt="Dark Mocha Frappe">
+                <h3>Dark Mocha Frappe</h3>
+                <p>Price: ₱79 16oz ┃ ₱99 22oz</p>
+                <label for="size-dark-mocha-frappe">Choose Size:</label>
+                <select id="size-dark-mocha-frappe">
+                    <option value="79">16 oz - ₱79</option>
+                    <option value="99">22 oz - ₱99</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-DarkMochaFrappe">
+                <button class="order-btn" onclick="addToCart('Dark Mocha Frappe', document.getElementById('quantity-DarkMochaFrappe').value, document.getElementById('size-dark-mocha-frappe').value)">Order</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section class="box" id="menu3">    
+    <div class="box" id="menu3">
+        <h2>Milk Tea</h2>
+        <div class="menu-details">
+            <div class="item-box">
+                <img src="okinawa.jpg" alt="Okinawa">
+                <h3>Okinawa</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-okinawa">Choose Size:</label>
+                <select id="size-okinawa">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Okinawa">
+                <button class="order-btn" onclick="addToCart('Okinawa', document.getElementById('quantity-Okinawa').value, document.getElementById('size-okinawa').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="wintermt.jpg" alt="Wintermelon">
+                <h3>Wintermelon</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-wintermelon">Choose Size:</label>
+                <select id="size-wintermelon">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Wintermelon">
+                <button class="order-btn" onclick="addToCart('Wintermelon', document.getElementById('quantity-Wintermelon').value, document.getElementById('size-wintermelon').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="saltedcaramel.png" alt="Salted Caramel">
+                <h3>Salted Caramel</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-salted-caramel">Choose Size:</label>
+                <select id="size-salted-caramel">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-SaltedCaramel">
+                <button class="order-btn" onclick="addToCart('Salted Caramel', document.getElementById('quantity-SaltedCaramel').value, document.getElementById('size-salted-caramel').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="cac.png" alt="Cookies n' Cream">
+                <h3>Cookies n' Cream</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-cookies-cream">Choose Size:</label>
+                <select id="size-cookies-cream">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-CookiesCream">
+                <button class="order-btn" onclick="addToCart('Cookies and Cream', document.getElementById('quantity-CookiesCream').value, document.getElementById('size-cookies-cream').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="cheesec.png" alt="Cheesecake">
+                <h3>Cheesecake</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-cheesecake">Choose Size:</label>
+                <select id="size-cheesecake">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Cheesecake">
+                <button class="order-btn" onclick="addToCart('Cheesecake', document.getElementById('quantity-Cheesecake').value, document.getElementById('size-cheesecake').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="taro.jpg" alt="Taro">
+                <h3>Taro</h3>
+                <p>Price: ₱140</p>
+                <label for="size-taro">Choose Size:</label>
+                <select id="size-taro">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Taro">
+                <button class="order-btn" onclick="addToCart('Taro', document.getElementById('quantity-Taro').value, document.getElementById('size-taro').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="redv.jpg" alt="Red Velvet">
+                <h3>Red Velvet</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-red-velvet">Choose Size:</label>
+                <select id="size-red-velvet">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-RedVelvet">
+                <button class="order-btn" onclick="addToCart('Red Velvet', document.getElementById('quantity-RedVelvet').value, document.getElementById('size-red-velvet').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="milk tea.jpg" alt="Strawberry">
+                <h3>Strawberry</h3>
+                <p>Price: ₱39 16oz ┃ ₱49 22oz</p>
+                <label for="size-strawberry">Choose Size:</label>
+                <select id="size-strawberry">
+                    <option value="39">16 oz - ₱39</option>
+                    <option value="49">22 oz - ₱49</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Strawberry">
+                <button class="order-btn" onclick="addToCart('Strawberry', document.getElementById('quantity-Strawberry').value, document.getElementById('size-strawberry').value)">Order</button>
+            </div>
+        </div>
+     </div>
+     </section>
+
+     </section class="box" id="menu4">     
+     <div class="box" id="menu4">
+        <h2>Fruit Tea</h2>
+        <div class="menu-details">
+            <div class="item-box">
+                <img src="fruitteaa.jpg" alt="Strawberry">
+                <h3>Strawberry</h3>
+                <p>Price: ₱45 16oz ┃ ₱55 22oz</p>
+                <label for="size-strawberry">Choose Size:</label>
+                <select id="size-strawberry">
+                    <option value="45">16 oz - ₱45</option>
+                    <option value="55">22 oz - ₱55</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Strawberry">
+                <button class="order-btn" onclick="addToCart('Strawberry', document.getElementById('quantity-Strawberry').value, document.getElementById('size-strawberry').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="fruitteaa.jpg" alt="Green Apple">
+                <h3>Green Apple</h3>
+                <p>Price: ₱45 16oz ┃ ₱55 22oz</p>
+                <label for="size-green-apple">Choose Size:</label>
+                <select id="size-green-apple">
+                    <option value="45">16 oz - ₱45</option>
+                    <option value="55">22 oz - ₱55</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-GreenApple">
+                <button class="order-btn" onclick="addToCart('Green Apple', document.getElementById('quantity-GreenApple').value, document.getElementById('size-green-apple').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="fruitteaa.jpg" alt="Lychee">
+                <h3>Lychee</h3>
+                <p>Price: ₱45 16oz ┃ ₱55 22oz</p>
+                <label for="size-lychee">Choose Size:</label>
+                <select id="size-lychee">
+                    <option value="45">16 oz - ₱45</option>
+                    <option value="55">22 oz - ₱55</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Lychee">
+                <button class="order-btn" onclick="addToCart('Lychee', document.getElementById('quantity-Lychee').value, document.getElementById('size-lychee').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="fruitteaa.jpg" alt="Lemon">
+                <h3>Lemon</h3>
+                <p>Price: ₱45 16oz ┃ ₱55 22oz</p>
+                <label for="size-lemon">Choose Size:</label>
+                <select id="size-lemon">
+                    <option value="45">16 oz - ₱45</option>
+                    <option value="55">22 oz - ₱55</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-Lemon">
+                <button class="order-btn" onclick="addToCart('Lemon', document.getElementById('quantity-Lemon').value, document.getElementById('size-lemon').value)">Order</button>
+            </div>
+        </div>
+     </div>
+     </section>
+     
+     </section class="box" id="menu5">
+     <div class="box" id="menu5">
+        <h2>Non Coffee</h2>
+        <div class="menu-details">
+            <div class="item-box">
+                <img src="sc.jpg" alt="Strawberries and Cream">
+                <h3>Strawberries and Cream</h3>
+                <p>Price: ₱65 16oz ┃ ₱80 22oz</p>
+                <label for="size-strawberries-cream">Choose Size:</label>
+                <select id="size-strawberries-cream">
+                    <option value="65">16 oz - ₱65</option>
+                    <option value="80">22 oz - ₱80</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-StrawberriesCream">
+                <button class="order-btn" onclick="addToCart('Strawberries and Cream', document.getElementById('quantity-StrawberriesCream').value, document.getElementById('size-strawberries-cream').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="noncoffe.jpg" alt="Matcha Milk">
+                <h3>Matcha Milk</h3>
+                <p>Price: ₱70 16oz ┃ ₱85 22oz</p>
+                <label for="size-matcha-milk">Choose Size:</label>
+                <select id="size-matcha-milk">
+                    <option value="70">16 oz - ₱70</option>
+                    <option value="85">22 oz - ₱85</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-MatchaMilk">
+                <button class="order-btn" onclick="addToCart('Matcha Milk', document.getElementById('quantity-MatchaMilk').value, document.getElementById('size-matcha-milk').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="noncoffe.jpg" alt="Strawberry Matcha Milk">
+                <h3>Strawberry Matcha Milk</h3>
+                <p>Price: ₱80 16oz ┃ ₱95 22oz</p>
+                <label for="size-strawberry-matcha-milk">Choose Size:</label>
+                <select id="size-strawberry-matcha-milk">
+                    <option value="80">16 oz - ₱80</option>
+                    <option value="95">22 oz - ₱95</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-StrawberryMatchaMilk">
+                <button class="order-btn" onclick="addToCart('Strawberry Matcha Milk', document.getElementById('quantity-StrawberryMatchaMilk').value, document.getElementById('size-strawberry-matcha-milk').value)">Order</button>
+            </div>
+    
+            <div class="item-box">
+                <img src="ic.jpeg" alt="Iced Chocolate">
+                <h3>Iced Chocolate</h3>
+                <p>Price: ₱65 16oz ┃ ₱80 22oz</p>
+                <label for="size-iced-chocolate">Choose Size:</label>
+                <select id="size-iced-chocolate">
+                    <option value="65">16 oz - ₱65</option>
+                    <option value="80">22 oz - ₱80</option>
+                </select>
+                <input type="number" value="1" min="1" class="quantity-input" id="quantity-IcedChocolate">
+                <button class="order-btn" onclick="addToCart('Iced Chocolate', document.getElementById('quantity-IcedChocolate').value, document.getElementById('size-iced-chocolate').value)">Order</button>
+            </div>
+        </div>
+     </div>
+     </section>
+    
+     </section class="box" id="menu6">
+        <div class="box" id="menu6">
+            <h2>Non Coffee Frappe</h2>
+            <div class="menu-details">
+                <div class="item-box">
+                    <img src="dc.jpg" alt="Dark Choco">
+                    <h3>Dark Choco</h3>
+                    <p>Price: ₱69 16oz ┃ ₱89 22oz</p>
+                    <label for="size-dark-choco">Choose Size:</label>
+                    <select id="size-dark-choco">
+                        <option value="69">16 oz - ₱69</option>
+                        <option value="89">22 oz - ₱89</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-dark-choco">
+                    <button class="order-btn" onclick="addToCart('Dark Choco', document.getElementById('quantity-dark-choco').value, document.getElementById('size-dark-choco').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cf.jpg" alt="Caramel">
+                    <h3>Caramel</h3>
+                    <p>Price: ₱69 16oz ┃ ₱89 22oz</p>
+                    <label for="size-caramel">Choose Size:</label>
+                    <select id="size-caramel">
+                        <option value="69">16 oz - ₱69</option>
+                        <option value="89">22 oz - ₱89</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-caramel">
+                    <button class="order-btn" onclick="addToCart('Caramel', document.getElementById('quantity-caramel').value, document.getElementById('size-caramel').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="scc.jpg" alt="Strawberry">
+                    <h3>Strawberry</h3>
+                    <p>Price: ₱69 16oz ┃ ₱89 22oz</p>
+                    <label for="size-strawberry">Choose Size:</label>
+                    <select id="size-strawberry">
+                        <option value="69">16 oz - ₱69</option>
+                        <option value="89">22 oz - ₱89</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-strawberry">
+                    <button class="order-btn" onclick="addToCart('Strawberry', document.getElementById('quantity-strawberry').value, document.getElementById('size-strawberry').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="taro.jpg" alt="Taro">
+                    <h3>Taro</h3>
+                    <p>Price: ₱69 16oz ┃ ₱89 22oz</p>
+                    <label for="size-taro">Choose Size:</label>
+                    <select id="size-taro">
+                        <option value="69">16 oz - ₱69</option>
+                        <option value="89">22 oz - ₱89</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-taro">
+                    <button class="order-btn" onclick="addToCart('Taro', document.getElementById('quantity-taro').value, document.getElementById('size-taro').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="MGFrappe.jpg" alt="Mango Graham">
+                    <h3>Mango Graham</h3>
+                    <p>Price: ₱99 16oz ┃ 119 22oz</p>
+                    <label for="size-mango-graham">Choose Size:</label>
+                    <select id="size-mango-graham">
+                        <option value="99">16 oz - ₱99</option>
+                        <option value="119">22 oz - ₱119</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-mango-graham">
+                    <button class="order-btn" onclick="addToCart('Mango Graham', document.getElementById('quantity-mango-graham').value, document.getElementById('size-mango-graham').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="Cookiesandcream.jpg" alt="Cookies and Cream">
+                    <h3>Cookies and Cream</h3>
+                    <p>Price: ₱99 16oz ┃ 119 22oz</p>
+                    <label for="size-cookies-cream">Choose Size:</label>
+                    <select id="size-cookies-cream">
+                        <option value="99">16 oz - ₱99</option>
+                        <option value="119">22 oz - ₱119</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-cookies-cream">
+                    <button class="order-btn" onclick="addToCart('Cookies and Cream', document.getElementById('quantity-cookies-cream').value, document.getElementById('size-cookies-cream').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="StrawBOreo.jpg" alt="Strawberry Oreo">
+                    <h3>Strawberry Oreo</h3>
+                    <p>Price: ₱99 16oz ┃ 119 22oz</p>
+                    <label for="size-strawberry-oreo">Choose Size:</label>
+                    <select id="size-strawberry-oreo">
+                        <option value="99">16 oz - ₱99</option>
+                        <option value="119">22 oz - ₱119</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-strawberry-oreo">
+                    <button class="order-btn" onclick="addToCart('Strawberry Oreo', document.getElementById('quantity-strawberry-oreo').value, document.getElementById('size-strawberry-oreo').value)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cheesecakef.jpg" alt="Cheesecake">
+                    <h3>Cheesecake</h3>
+                    <p>Price: ₱69 16oz ┃ 119 22oz</p>
+                    <label for="size-cheesecake">Choose Size:</label>
+                    <select id="size-cheesecake">
+                        <option value="69">16 oz - ₱69</option>
+                        <option value="119">22 oz - ₱119</option>
+                    </select>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-cheesecake">
+                    <button class="order-btn" onclick="addToCart('Cheesecake', document.getElementById('quantity-cheesecake').value, document.getElementById('size-cheesecake').value)">Order</button>
+                </div>
+            </div>
+        </div>
+     </section>    
+        
+     </section class="box" id="menu7">
+        <div class="box" id="menu7">
+            <h2>Snacks</h2>
+            <div class="menu-details">
+                <div class="item-box">
+                    <img src="regularfries.jpg" alt="Regular Fries">
+                    <h3>Regular Fries</h3>
+                    <p>Price: ₱50</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-RegularFries">
+                    <button class="order-btn" onclick="addToCart('Regular Fries', document.getElementById('quantity-RegularFries').value, 50)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cheesyfries.jpg" alt="Cheesy Fries">
+                    <h3>Cheesy Fries</h3>
+                    <p>Price: ₱79</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-CheesyFries">
+                    <button class="order-btn" onclick="addToCart('Cheesy Fries', document.getElementById('quantity-CheesyFries').value, 79)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="nachoos.jpg" alt="Nachos">
+                    <h3>Nachos</h3>
+                    <p>Price: ₱89</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-Nachos">
+                    <button class="order-btn" onclick="addToCart('Nachos', document.getElementById('quantity-Nachos').value, 89)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cheesytuna.jpg" alt="Cheesy Tuna Sandwich">
+                    <h3>Cheesy Tuna Sandwich</h3>
+                    <p>Price: ₱89</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-CheesyTunaSandwich">
+                    <button class="order-btn" onclick="addToCart('Cheesy Tuna Sandwich', document.getElementById('quantity-CheesyTunaSandwich').value, 89)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="spameggsannobg.png" alt="Spam & Egg Sandwich">
+                    <h3>Spam & Egg Sandwich</h3>
+                    <p>Price: ₱89</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-SpamEggSandwich">
+                    <button class="order-btn" onclick="addToCart('Spam & Egg Sandwich', document.getElementById('quantity-SpamEggSandwich').value, 89)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="barkada.jpg" alt="Barkada Meal">
+                    <h3>Barkada Meal</h3>
+                    <p>Price: ₱279</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-BarkadaMeal">
+                    <button class="order-btn" onclick="addToCart('Barkada Meal', document.getElementById('quantity-BarkadaMeal').value, 279)">Order</button>
+                </div>
+            </div>
+        </div>
+     </section>
+
+       </section class="box" id="menu8"> 
+        <div class="box" id="menu8">
+            <h2>Rice Bowl</h2>
+            <div class="menu-details">
+                <div class="item-box">
+                    <img src="cheesyhungarian.jpg" alt="Cheesy Hungarian">
+                    <h3>Cheesy Hungarian</h3>
+                    <p>Price: ₱89</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-CheesyHungarian">
+                    <button class="order-btn" onclick="addToCart('Cheesy Hungarian', document.getElementById('quantity-CheesyHungarian').value, 89)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cheesyricebowl.jpg" alt="Bacon & Cheese">
+                    <h3>Bacon & Cheese</h3>
+                    <p>Price: ₱89</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-BaconCheese">
+                    <button class="order-btn" onclick="addToCart('Bacon & Cheese', document.getElementById('quantity-BaconCheese').value, 89)">Order</button>
+                </div>
+            </div>
+        </div>
+     </section>
+        
+        </section class="box" id="menu9">
+        <div class="box" id="menu9">
+            <h2>Pasta</h2>
+            <div class="menu-details">
+                <div class="item-box">
+                    <img src="garlicTparme.jpg" alt="Garlic Tuna Parmesan">
+                    <h3>Garlic Tuna Parmesan</h3>
+                    <p>Price: ₱109</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-GarlicTunaParmesan">
+                    <button class="order-btn" onclick="addToCart('Garlic Tuna Parmesan', document.getElementById('quantity-GarlicTunaParmesan').value, 109)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="meatyspag.jpg" alt="Meaty Spaghetti">
+                    <h3>Meaty Spaghetti</h3>
+                    <p>Price: ₱109</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-MeatySpaghetti">
+                    <button class="order-btn" onclick="addToCart('Meaty Spaghetti', document.getElementById('quantity-MeatySpaghetti').value, 109)">Order</button>
+                </div>
+            </div>
+        </div>
+     </section>
+        
+     </section class="box" id="menu10">
+        <div class="box" id="menu10">
+            <h2>2PC Chicken With Java Rice</h2>
+            <div class="menu-details" id="menu10">
+                <div class="item-box">
+                    <img src="garlicp.png" alt="Garlic Parmesan">
+                    <h3>Garlic Parmesan</h3>
+                    <p>Price: ₱200</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-GarlicParmesan">
+                    <button class="order-btn" onclick="addToCart('Garlic Parmesan', document.getElementById('quantity-GarlicParmesan').value, 200)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="teriyaki.jpg" alt="Teriyaki">
+                    <h3>Teriyaki</h3>
+                    <p>Price: ₱210</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-Teriyaki">
+                    <button class="order-btn" onclick="addToCart('Teriyaki', document.getElementById('quantity-Teriyaki').value, 210)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="honeybutter.jpg" alt="Honey Butter">
+                    <h3>Honey Butter</h3>
+                    <p>Price: ₱220</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-HoneyButter">
+                    <button class="order-btn" onclick="addToCart('Honey Butter', document.getElementById('quantity-HoneyButter').value, 220)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="sweetchiliwings.jpg" alt="Sweet Chili">
+                    <h3>Sweet Chili</h3>
+                    <p>Price: ₱230</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-SweetChili">
+                    <button class="order-btn" onclick="addToCart('Sweet Chili', document.getElementById('quantity-SweetChili').value, 230)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="gpchick.jpg" alt="Salted Egg">
+                    <h3>Salted Egg</h3>
+                    <p>Price: ₱240</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-SaltedEgg">
+                    <button class="order-btn" onclick="addToCart('Salted Egg', document.getElementById('quantity-SaltedEgg').value, 240)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="cheesybacon.jpg" alt="Cheesy Bacon">
+                    <h3>Cheesy Bacon</h3>
+                    <p>Price: ₱250</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-CheesyBacon">
+                    <button class="order-btn" onclick="addToCart('Cheesy Bacon', document.getElementById('quantity-CheesyBacon').value, 250)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="yangneum.jpg" alt="Yangneum">
+                    <h3>Yangneum</h3>
+                    <p>Price: ₱260</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-Yangneum">
+                    <button class="order-btn" onclick="addToCart('Yangneum', document.getElementById('quantity-Yangneum').value, 260)">Order</button>
+                </div>
+        
+                <div class="item-box">
+                    <img src="bbq.jpg" alt="Barbeque">
+                    <h3>Barbeque</h3>
+                    <p>Price: ₱270</p>
+                    <input type="number" value="1" min="1" class="quantity-input" id="quantity-Barbeque">
+                    <button class="order-btn" onclick="addToCart('Barbeque', document.getElementById('quantity-Barbeque').value, 270)">Order</button>
+                </div>
+            </div>
+        </div>
+    <div>
+    </section>
+        
+ <script src="cart.js"></script>
+
+        
+
+        
+</body>
+</html>
