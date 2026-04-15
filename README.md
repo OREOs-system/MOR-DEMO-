@@ -1,2 +1,0 @@
-# MOR-DEMO-
-TESTER
