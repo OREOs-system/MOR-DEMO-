@@ -27,7 +27,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // Save user data to localStorage
+    // Simulate saving user data to localStorage (for this example)
     localStorage.setItem('user', JSON.stringify({ username, email, password }));
 
     // Redirect to login page or success message
