@@ -75,18 +75,29 @@ function removeItem(itemName) {
 // Checkout functionality
 function checkout() {
     alert('Proceeding to checkout');
-    
-    // Save the cart items to orders in localStorage
+
+    const customerName = localStorage.getItem('username') || 'Guest';
+    const customerEmail = localStorage.getItem('email') || '';
+    const transactionDate = new Date().toLocaleString();
+
+    const order = {
+        customerName,
+        customerEmail,
+        date: transactionDate,
+        items: [...cart],
+        total: totalPrice
+    };
+
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(...cart);  // Add current cart items to orders
+    orders.push(order);  // Add current order to orders
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
 
     localStorage.removeItem('cart');  // Clear the cart in localStorage
-    cart = [];  // Reset the cart arrays
+    cart = [];  // Reset the cart array
     totalPrice = 0;  // Reset total price
     updateCartAmount();  // Update the cart icon count
     updateCartDisplay();  // Update the cart display
-    window.location.href = "admin.html";  
+    window.location.href = "admin.html";
 }
 
 // Clear Cart functionality

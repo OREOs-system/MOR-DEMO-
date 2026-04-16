@@ -12,11 +12,33 @@ function displayOrders() {
 
     let ordersHTML = '';
     orders.forEach((order, index) => {
+        const customerName = order.customerName || order.name || 'Unknown';
+        const customerEmail = order.customerEmail || order.email || 'Unknown';
+        const date = order.date || 'Unknown date';
+        const total = order.total !== undefined ? order.total : order.price || 0;
+        const items = order.items || [order];
+
+        let itemsHTML = '';
+        items.forEach(item => {
+            itemsHTML += `
+                <div class="order-item-details">
+                    <strong>${item.name}</strong>
+                    <p>Quantity: ${item.quantity}</p>
+                    <p>Price: ₱${item.price}</p>
+                </div>
+            `;
+        });
+
         ordersHTML += `
         <div class="order-item">
-            <h4>${order.name}</h4>
-            <p>Quantity: ${order.quantity}</p>
-            <p>Price: ₱${order.price}</p>
+            <h3>Transaction #${index + 1}</h3>
+            <p><strong>Name:</strong> ${customerName}</p>
+            <p><strong>Email:</strong> ${customerEmail}</p>
+            <p><strong>Date:</strong> ${date}</p>
+            <p><strong>Total:</strong> ₱${total}</p>
+            <div class="order-items-list">
+                ${itemsHTML}
+            </div>
             <button onclick="removeOrder(${index})">Remove</button>
         </div>
         `;
