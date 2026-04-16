@@ -136,34 +136,6 @@ button {
     margin-left: 500px;
 }
 
-.order-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-}
-
-.order-item h3 {
-    margin-bottom: 10px;
-}
-
-.order-item p {
-    margin: 6px 0;
-}
-
-.order-item-details {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 6px;
-    border: 1px solid #eee;
-    margin-top: 10px;
-}
-
-.order-items-list {
-    margin-top: 10px;
-}
-
 /* Media Queries */
 @media (max-width: 768px) {
     .sidebar {

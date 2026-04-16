@@ -75,29 +75,42 @@ function removeItem(itemName) {
 // Checkout functionality
 function checkout() {
     alert('Proceeding to checkout');
-
-    const customerName = localStorage.getItem('username') || 'Guest';
-    const customerEmail = localStorage.getItem('email') || '';
-    const transactionDate = new Date().toLocaleString();
-
-    const order = {
-        customerName,
-        customerEmail,
-        date: transactionDate,
-        items: [...cart],
-        total: totalPrice
-    };
-
+    
+    // Get current user information
+    const user_id = localStorage.getItem('user_id');
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    
+    if (!user_id || !username || !email) {
+        alert('User information not found. Please login again.');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Get current date
+    const currentDate = new Date().toLocaleString();
+    
+    // Save the cart items to orders in localStorage with user info and date
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(order);  // Add current order to orders
+    cart.forEach(item => {
+        orders.push({
+            user_id: user_id,
+            name: username,
+            email: email,
+            date: currentDate,
+            product: item.name,
+            quantity: item.quantity,
+            price: item.price
+        });
+    });
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
 
     localStorage.removeItem('cart');  // Clear the cart in localStorage
-    cart = [];  // Reset the cart array
+    cart = [];  // Reset the cart arrays
     totalPrice = 0;  // Reset total price
     updateCartAmount();  // Update the cart icon count
     updateCartDisplay();  // Update the cart display
-    window.location.href = "admin.html";
+    window.location.href = "admin.html";  
 }
 
 // Clear Cart functionality
