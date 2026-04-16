@@ -27,9 +27,8 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // Generate a simple user_id and save user data to localStorage
-    const user_id = 'USER_' + Date.now();
-    localStorage.setItem('user', JSON.stringify({ user_id, username, email, password }));
+    // Save user data to localStorage
+    localStorage.setItem('user', JSON.stringify({ username, email, password }));
 
     // Redirect to login page or success message
     alert('Registration successful! Please login.');

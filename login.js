@@ -13,7 +13,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     // Check if the user exists and if the username, email, and password match
     if (storedUser && storedUser.username === username && storedUser.email === email && storedUser.password === password) {
         // Store user information in localStorage
-        localStorage.setItem('user_id', storedUser.user_id); // Store user_id
         localStorage.setItem('username', storedUser.username); // Store username
         localStorage.setItem('email', storedUser.email); // Store email
 
