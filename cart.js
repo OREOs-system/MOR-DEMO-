@@ -76,9 +76,28 @@ function removeItem(itemName) {
 function checkout() {
     alert('Proceeding to checkout');
     
-    // Save the cart items to orders in localStorage
+    // Get current user
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (!currentUser) {
+        alert('Please login to checkout');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Create order object with customer details
+    const order = {
+        customer: {
+            username: currentUser.username,
+            email: currentUser.email
+        },
+        items: [...cart],
+        total: totalPrice,
+        date: new Date().toISOString()
+    };
+    
+    // Save the order to orders in localStorage
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(...cart);  // Add current cart items to orders
+    orders.push(order);  // Add the order object to orders
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
 
     localStorage.removeItem('cart');  // Clear the cart in localStorage
