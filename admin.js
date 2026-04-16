@@ -10,17 +10,31 @@ function displayOrders() {
         return;
     }
 
-    let ordersHTML = '';
+    let ordersHTML = '<table style="width:100%; border-collapse: collapse;">';
+    ordersHTML += '<tr style="border: 1px solid #ddd; padding: 8px;">';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">User ID</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Email</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Date</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Quantity</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Price</th>';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Action</th>';
+    ordersHTML += '</tr>';
+    
     orders.forEach((order, index) => {
-        ordersHTML += `
-        <div class="order-item">
-            <h4>${order.name}</h4>
-            <p>Quantity: ${order.quantity}</p>
-            <p>Price: ₱${order.price}</p>
-            <button onclick="removeOrder(${index})">Remove</button>
-        </div>
-        `;
+        ordersHTML += '<tr style="border: 1px solid #ddd;">';
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.user_id || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.name || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.email || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.date || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.product || order.name || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.quantity || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">₱${order.price || 'N/A'}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;"><button onclick="removeOrder(${index})">Remove</button></td>`;
+        ordersHTML += '</tr>';
     });
+    ordersHTML += '</table>';
 
     ordersContainer.innerHTML = ordersHTML;
 }
