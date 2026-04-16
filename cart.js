@@ -1,19 +1,35 @@
-let cart = JSON.parse(localStorage.getItem('cart')) || [];  // Retrieve the cart from localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
+function getCurrentUser() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    return {
+        username: storedUser?.username || localStorage.getItem('username') || 'Guest',
+        email: storedUser?.email || localStorage.getItem('email') || ''
+    };
+}
 
 // Function to update the cart amount in the navbar
 function updateCartAmount() {
     const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cartAmount').textContent = cartCount;  // Update the cart item count
+    const cartAmount = document.getElementById('cartAmount');
+    if (cartAmount) {
+        cartAmount.textContent = cartCount;
+    }
 }
 
 // Function to display cart items and total price
 function updateCartDisplay() {
     const cartItemsContainer = document.getElementById('shopping-cart');
+    const labelContainer = document.getElementById('label');
+    if (!cartItemsContainer || !labelContainer) {
+        return;
+    }
+
     cartItemsContainer.innerHTML = '';  // Clear current cart display
 
     if (cart.length === 0) {
-        document.getElementById('label').innerHTML = `
+        labelContainer.innerHTML = `
             <h2>Your cart is empty</h2>
             <a href="mainpage.html">
                 <button class='homeBtn'>Back to Home</button>
@@ -34,8 +50,8 @@ function updateCartDisplay() {
         `;
     });
 
-    document.getElementById('shopping-cart').innerHTML = cartHTML;
-    document.getElementById('label').innerHTML = `
+    cartItemsContainer.innerHTML = cartHTML;
+    labelContainer.innerHTML = `
         <h2>Total: ₱${totalPrice}</h2>
         <button onclick="checkout()">Checkout</button>
         <button onclick="clearCart()">Clear Cart</button>
@@ -44,14 +60,16 @@ function updateCartDisplay() {
 
 // Function to add items to the cart
 function addToCart(itemName, quantity, price) {
+    quantity = parseInt(quantity, 10) || 1;
+    price = Number(price) || 0;
     const itemTotal = quantity * price;
     const existingItem = cart.find(item => item.name === itemName);
 
     if (existingItem) {
-        existingItem.quantity += parseInt(quantity);
+        existingItem.quantity += quantity;
         existingItem.price += itemTotal;
     } else {
-        cart.push({ name: itemName, quantity: parseInt(quantity), price: itemTotal });
+        cart.push({ name: itemName, quantity, price: itemTotal });
     }
 
     totalPrice += itemTotal;
@@ -74,11 +92,24 @@ function removeItem(itemName) {
 
 // Checkout functionality
 function checkout() {
-    alert('Proceeding to checkout');
-    
-    // Save the cart items to orders in localStorage
-    let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders.push(...cart);  // Add current cart items to orders
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add items before checking out.');
+        return;
+    }
+
+    const currentUser = getCurrentUser();
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderTotal = cart.reduce((total, item) => total + item.price, 0);
+    const orderObject = {
+        id: Date.now(),
+        customerName: currentUser.username,
+        customerEmail: currentUser.email,
+        date: new Date().toLocaleString(),
+        total: orderTotal,
+        items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price }))
+    };
+
+    orders.push(orderObject);
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
 
     localStorage.removeItem('cart');  // Clear the cart in localStorage
@@ -86,7 +117,9 @@ function checkout() {
     totalPrice = 0;  // Reset total price
     updateCartAmount();  // Update the cart icon count
     updateCartDisplay();  // Update the cart display
-    window.location.href = "admin.html";  
+
+    alert('Order placed successfully!');
+    window.location.href = "admin.html";
 }
 
 // Clear Cart functionality

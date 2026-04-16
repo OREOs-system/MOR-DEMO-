@@ -136,6 +136,52 @@ button {
     margin-left: 500px;
 }
 
+.filter-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#customer-filter {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.order-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.order-header p,
+.order-header h3 {
+    margin: 8px 0;
+}
+
+.order-details ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.remove-order-btn {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.remove-order-btn:hover {
+    background-color: #c9302c;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
     .sidebar {
