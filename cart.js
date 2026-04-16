@@ -77,11 +77,10 @@ function checkout() {
     alert('Proceeding to checkout');
     
     // Get current user information
-    const user_id = localStorage.getItem('user_id');
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
     
-    if (!user_id || !username || !email) {
+    if (!username || !email) {
         alert('User information not found. Please login again.');
         window.location.href = 'login.html';
         return;
@@ -94,7 +93,6 @@ function checkout() {
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
     cart.forEach(item => {
         orders.push({
-            user_id: user_id,
             name: username,
             email: email,
             date: currentDate,
