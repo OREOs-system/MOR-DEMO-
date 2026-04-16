@@ -89,16 +89,18 @@ function checkout() {
     // Get current date
     const currentDate = new Date().toLocaleString();
     
-    // Save the cart items to orders in localStorage with user info and date
+    // Save the cart items to orders in localStorage with user info, date, and initial status
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    cart.forEach(item => {
+    cart.forEach((item, index) => {
         orders.push({
+            id: `${Date.now()}-${index}`,
             name: username,
             email: email,
             date: currentDate,
             product: item.name,
             quantity: item.quantity,
-            price: item.price
+            price: item.price,
+            status: 'new'
         });
     });
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
