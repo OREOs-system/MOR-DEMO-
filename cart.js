@@ -110,7 +110,7 @@ function checkout() {
     totalPrice = 0;  // Reset total price
     updateCartAmount();  // Update the cart icon count
     updateCartDisplay();  // Update the cart display
-    window.location.href = "admin.html";  
+    window.location.href = "delivery.html";  // Redirect to delivery page instead of admin
 }
 
 // Clear Cart functionality

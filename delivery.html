@@ -86,6 +86,17 @@
     </form>
 
 </div>    
+
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+    
+    // Here you can collect the form data if needed
+    // For now, just show a confirmation and redirect
+    alert('Order placed successfully! Thank you for your purchase.');
+    window.location.href = 'mainpage.html';
+});
+</script>
     
 </body>
 </html>
