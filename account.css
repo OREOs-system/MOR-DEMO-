@@ -78,3 +78,29 @@ img {
 #twoFactorAuth {
     margin-left: 10px;
 }
+
+/* Order History Table Styles */
+#orderHistory table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#orderHistory th, #orderHistory td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#orderHistory th {
+    background-color: chocolate;
+    color: white;
+}
+
+#orderHistory tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#orderHistory tr:hover {
+    background-color: #ddd;
+}

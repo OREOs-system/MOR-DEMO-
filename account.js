@@ -7,6 +7,9 @@ window.onload = function() {
         document.getElementById('usernameDisplay').textContent = storedUser.username;
         document.getElementById('emailDisplay').textContent = storedUser.email;
         document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
+        
+        // Display order history
+        displayOrderHistory(storedUser.email);
     } else {
         alert("You are not logged in.");
         window.location.href = "login.html";  // Redirect to login page if not logged in
@@ -94,4 +97,55 @@ function logout() {
 function validateEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
+}
+
+// Function to get status label
+function getStatusLabel(status) {
+    switch (status) {
+        case 'new':
+            return 'Awaiting Admin';
+        case 'accepted':
+            return 'Pending';
+        case 'completed':
+            return 'Completed';
+        case 'cancelled':
+            return 'Cancelled';
+        default:
+            return 'Unknown';
+    }
+}
+
+// Function to display order history for the current user
+function displayOrderHistory(userEmail) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const userOrders = orders.filter(order => order.email === userEmail);
+    
+    const orderHistoryContainer = document.getElementById('orderHistory');
+    
+    if (userOrders.length === 0) {
+        orderHistoryContainer.innerHTML = '<p>No orders found.</p>';
+        return;
+    }
+    
+    let ordersHTML = '<table>';
+    ordersHTML += '<tr>';
+    ordersHTML += '<th>Date</th>';
+    ordersHTML += '<th>Product</th>';
+    ordersHTML += '<th>Quantity</th>';
+    ordersHTML += '<th>Price</th>';
+    ordersHTML += '<th>Status</th>';
+    ordersHTML += '</tr>';
+    
+    userOrders.forEach(order => {
+        ordersHTML += '<tr>';
+        ordersHTML += `<td>${order.date || 'N/A'}</td>`;
+        ordersHTML += `<td>${order.product || 'N/A'}</td>`;
+        ordersHTML += `<td>${order.quantity || 'N/A'}</td>`;
+        ordersHTML += `<td>₱${order.price || 'N/A'}</td>`;
+        ordersHTML += `<td>${getStatusLabel(order.status)}</td>`;
+        ordersHTML += '</tr>';
+    });
+    ordersHTML += '</table>';
+    
+    orderHistoryContainer.innerHTML = ordersHTML;
 }
