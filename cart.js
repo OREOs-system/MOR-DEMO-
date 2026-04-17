@@ -91,9 +91,11 @@ function checkout() {
     
     // Save the cart items to orders in localStorage with user info, date, and initial status
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderId = `ORD-${Date.now()}`;
     cart.forEach((item, index) => {
         orders.push({
-            id: `${Date.now()}-${index}`,
+            id: `${orderId}-${index}`,
+            orderId: orderId,
             name: username,
             email: email,
             date: currentDate,

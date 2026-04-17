@@ -99,19 +99,19 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// Function to get status label
-function getStatusLabel(status) {
+// Function to get status label and class
+function getStatusInfo(status) {
     switch (status) {
         case 'new':
-            return 'Awaiting Admin';
+            return { label: 'Awaiting Admin', class: 'status-awaiting' };
         case 'accepted':
-            return 'Pending';
+            return { label: 'Pending', class: 'status-pending' };
         case 'completed':
-            return 'Completed';
+            return { label: 'Completed', class: 'status-completed' };
         case 'cancelled':
-            return 'Cancelled';
+            return { label: 'Cancelled', class: 'status-cancelled' };
         default:
-            return 'Unknown';
+            return { label: 'Unknown', class: '' };
     }
 }
 
@@ -129,6 +129,7 @@ function displayOrderHistory(userEmail) {
     
     let ordersHTML = '<table>';
     ordersHTML += '<tr>';
+    ordersHTML += '<th>Order ID</th>';
     ordersHTML += '<th>Date</th>';
     ordersHTML += '<th>Product</th>';
     ordersHTML += '<th>Quantity</th>';
@@ -137,12 +138,14 @@ function displayOrderHistory(userEmail) {
     ordersHTML += '</tr>';
     
     userOrders.forEach(order => {
+        const statusInfo = getStatusInfo(order.status);
         ordersHTML += '<tr>';
+        ordersHTML += `<td>${order.orderId || order.id || 'N/A'}</td>`;
         ordersHTML += `<td>${order.date || 'N/A'}</td>`;
         ordersHTML += `<td>${order.product || 'N/A'}</td>`;
         ordersHTML += `<td>${order.quantity || 'N/A'}</td>`;
         ordersHTML += `<td>₱${order.price || 'N/A'}</td>`;
-        ordersHTML += `<td>${getStatusLabel(order.status)}</td>`;
+        ordersHTML += `<td class="${statusInfo.class}">${statusInfo.label}</td>`;
         ordersHTML += '</tr>';
     });
     ordersHTML += '</table>';

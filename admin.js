@@ -28,6 +28,7 @@ function displayOrders() {
 
     let ordersHTML = '<table style="width:100%; border-collapse: collapse;">';
     ordersHTML += '<tr style="border: 1px solid #ddd; padding: 8px;">';
+    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Order ID</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Email</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Date</th>';
@@ -40,6 +41,7 @@ function displayOrders() {
     
     orders.forEach((order, index) => {
         ordersHTML += '<tr style="border: 1px solid #ddd;">';
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.orderId || order.id || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.name || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.email || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.date || 'N/A'}</td>`;

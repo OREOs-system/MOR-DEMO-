@@ -101,6 +101,27 @@ img {
     background-color: #f2f2f2;
 }
 
+/* Status colors */
+.status-awaiting {
+    color: orange;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-completed {
+    color: green;
+    font-weight: bold;
+}
+
+.status-cancelled {
+    color: red;
+    font-weight: bold;
+}
+
 #orderHistory tr:hover {
     background-color: #ddd;
 }
