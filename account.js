@@ -152,3 +152,23 @@ function displayOrderHistory(userEmail) {
     
     orderHistoryContainer.innerHTML = ordersHTML;
 }
+
+// Clear transaction history for the current user
+function clearOrderHistory() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (!storedUser) {
+        alert('You must be logged in to clear your history.');
+        return;
+    }
+
+    if (!confirm('Are you sure you want to clear your transaction history? This cannot be undone.')) {
+        return;
+    }
+
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders = orders.filter(order => order.email !== storedUser.email);
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    displayOrderHistory(storedUser.email);
+    alert('Your transaction history has been cleared.');
+}

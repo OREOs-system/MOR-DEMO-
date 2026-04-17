@@ -71,6 +71,17 @@ function saveOrders() {
     localStorage.setItem('orders', JSON.stringify(orders));
 }
 
+function clearAllOrders() {
+    if (!confirm('Are you sure you want to clear all transaction history? This will remove every order permanently.')) {
+        return;
+    }
+
+    orders = [];
+    saveOrders();
+    displayOrders();
+    alert('All transaction history has been cleared.');
+}
+
 function acceptOrder(index) {
     orders[index].status = 'accepted';
     saveOrders();

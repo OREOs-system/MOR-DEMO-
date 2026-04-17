@@ -130,6 +130,19 @@ button {
     width: 80px;
     cursor: pointer;
 }
+
+button.danger-btn {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: auto;
+    padding: 8px 14px;
+}
+
+button.danger-btn:hover {
+    background-color: #a53124;
+}
 .homeBtn{
     margin-top: 30px;
     width: 100px;

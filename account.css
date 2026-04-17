@@ -51,7 +51,15 @@ button {
 }
 
 button:hover {
-    background-color: chocolate;
+    background-color: #a75c2d;
+}
+
+button.danger-btn {
+    background-color: #c0392b;
+}
+
+button.danger-btn:hover {
+    background-color: #a53124;
 }
 
 input[type="password"] {
