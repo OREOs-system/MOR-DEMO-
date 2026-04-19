@@ -270,3 +270,29 @@ body::before {
     border-color: #d97f2d;
 }
 
+/* Admin Actions */
+.admin-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-clear-history {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #c53345 0%, #7e1c2d 100%);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 15px;
+}
+
+.btn-clear-history:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(197, 51, 69, 0.3);
+}
+

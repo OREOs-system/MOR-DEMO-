@@ -142,6 +142,35 @@ function updateOrderStatus(orderId, newStatus) {
     displayOrders();
 }
 
+// Clear all transaction history
+function clearTransactionHistory() {
+    const confirmClear = confirm(
+        'WARNING: This will delete ALL transaction history.\n\n' +
+        'Are you sure you want to proceed? This action cannot be undone.'
+    );
+
+    if (!confirmClear) {
+        return;
+    }
+
+    const confirmAgain = confirm(
+        'Are you absolutely sure? All order data will be permanently deleted.'
+    );
+
+    if (!confirmAgain) {
+        return;
+    }
+
+    // Clear orders from localStorage
+    localStorage.removeItem('orders');
+    orders = [];
+
+    alert('✅ Transaction history cleared successfully!\n\nAll orders have been deleted.');
+    
+    // Refresh the display
+    displayOrders();
+}
+
 // Initial orders display
 document.addEventListener('DOMContentLoaded', () => {
     displayOrders();

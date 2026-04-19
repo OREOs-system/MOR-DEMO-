@@ -194,6 +194,53 @@ function refreshUsers() {
     alert('User list refreshed');
 }
 
+// Reset database - keep only admin account
+function resetDatabase() {
+    const confirmReset = confirm(
+        'WARNING: This will delete ALL user accounts except the admin account.\n\n' +
+        'Are you sure you want to proceed? This action cannot be undone.'
+    );
+
+    if (!confirmReset) {
+        return;
+    }
+
+    const confirmAgain = confirm(
+        'Are you absolutely sure? All user data will be permanently deleted.'
+    );
+
+    if (!confirmAgain) {
+        return;
+    }
+
+    // Create admin user object
+    const adminUser = {
+        user_id: 'ADMIN_001',
+        username: 'admin',
+        email: 'admin@mccaffe.com',
+        password: 'admin123',
+        role: 'admin',
+        profilePicture: 'default-profile.png',
+        createdAt: new Date().toLocaleDateString()
+    };
+
+    // Reset allUsers to only contain admin
+    allUsers = [adminUser];
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+
+    // Clear current logged in user
+    localStorage.removeItem('user');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+
+    alert('✅ Database reset successful!\n\nAll user accounts have been deleted.\nOnly the admin account remains.\n\nUsername: admin\nPassword: admin123');
+    
+    // Refresh the display
+    displayUsers();
+    updateStats();
+}
+
 // Modal functions
 function openAddUserModal() {
     editingUserId = null;
