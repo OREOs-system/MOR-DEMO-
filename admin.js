@@ -100,8 +100,8 @@ function displayOrders() {
                     </table>
                 </div>
                 <div class="admin-order-actions">
-                    ${firstOrder.status === 'new' ? `<button onclick="updateOrderStatus('${orderId}', 'accepted')">Accept</button> <button onclick="updateOrderStatus('${orderId}', 'cancelled')">Refuse</button>` : ''}
-                    ${firstOrder.status === 'accepted' ? `<button onclick="updateOrderStatus('${orderId}', 'completed')">Mark Done</button>` : ''}
+                    ${firstOrder.status === 'new' ? `<button class="btn-accept" onclick="updateOrderStatus('${orderId}', 'accepted')">Accept</button> <button class="btn-refuse" onclick="updateOrderStatus('${orderId}', 'cancelled')">Refuse</button>` : ''}
+                    ${firstOrder.status === 'accepted' ? `<button class="btn-complete" onclick="updateOrderStatus('${orderId}', 'completed')">Mark Done</button>` : ''}
                     ${firstOrder.status !== 'new' && firstOrder.status !== 'accepted' ? `<span class="admin-info">No actions available for this order.</span>` : ''}
                 </div>
             </div>
