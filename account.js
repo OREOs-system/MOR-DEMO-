@@ -7,9 +7,6 @@ window.onload = function() {
         document.getElementById('usernameDisplay').textContent = storedUser.username;
         document.getElementById('emailDisplay').textContent = storedUser.email;
         document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
-        
-        // Display order history
-        displayOrderHistory(storedUser.email);
     } else {
         alert("You are not logged in.");
         window.location.href = "login.html";  // Redirect to login page if not logged in
@@ -97,78 +94,4 @@ function logout() {
 function validateEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
-}
-
-// Function to get status label and class
-function getStatusInfo(status) {
-    switch (status) {
-        case 'new':
-            return { label: 'Awaiting Admin', class: 'status-awaiting' };
-        case 'accepted':
-            return { label: 'Pending', class: 'status-pending' };
-        case 'completed':
-            return { label: 'Completed', class: 'status-completed' };
-        case 'cancelled':
-            return { label: 'Cancelled', class: 'status-cancelled' };
-        default:
-            return { label: 'Unknown', class: '' };
-    }
-}
-
-// Function to display order history for the current user
-function displayOrderHistory(userEmail) {
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const userOrders = orders.filter(order => order.email === userEmail);
-    
-    const orderHistoryContainer = document.getElementById('orderHistory');
-    
-    if (userOrders.length === 0) {
-        orderHistoryContainer.innerHTML = '<p>No orders found.</p>';
-        return;
-    }
-    
-    let ordersHTML = '<table>';
-    ordersHTML += '<tr>';
-    ordersHTML += '<th>Order ID</th>';
-    ordersHTML += '<th>Date</th>';
-    ordersHTML += '<th>Product</th>';
-    ordersHTML += '<th>Quantity</th>';
-    ordersHTML += '<th>Price</th>';
-    ordersHTML += '<th>Status</th>';
-    ordersHTML += '</tr>';
-    
-    userOrders.forEach(order => {
-        const statusInfo = getStatusInfo(order.status);
-        ordersHTML += '<tr>';
-        ordersHTML += `<td>${order.orderId || order.id || 'N/A'}</td>`;
-        ordersHTML += `<td>${order.date || 'N/A'}</td>`;
-        ordersHTML += `<td>${order.product || 'N/A'}</td>`;
-        ordersHTML += `<td>${order.quantity || 'N/A'}</td>`;
-        ordersHTML += `<td>₱${order.price || 'N/A'}</td>`;
-        ordersHTML += `<td class="${statusInfo.class}">${statusInfo.label}</td>`;
-        ordersHTML += '</tr>';
-    });
-    ordersHTML += '</table>';
-    
-    orderHistoryContainer.innerHTML = ordersHTML;
-}
-
-// Clear transaction history for the current user
-function clearOrderHistory() {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (!storedUser) {
-        alert('You must be logged in to clear your history.');
-        return;
-    }
-
-    if (!confirm('Are you sure you want to clear your transaction history? This cannot be undone.')) {
-        return;
-    }
-
-    let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    orders = orders.filter(order => order.email !== storedUser.email);
-    localStorage.setItem('orders', JSON.stringify(orders));
-
-    displayOrderHistory(storedUser.email);
-    alert('Your transaction history has been cleared.');
 }

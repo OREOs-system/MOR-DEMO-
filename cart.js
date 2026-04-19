@@ -89,20 +89,16 @@ function checkout() {
     // Get current date
     const currentDate = new Date().toLocaleString();
     
-    // Save the cart items to orders in localStorage with user info, date, and initial status
+    // Save the cart items to orders in localStorage with user info and date
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const orderId = `ORD-${Date.now()}`;
-    cart.forEach((item, index) => {
+    cart.forEach(item => {
         orders.push({
-            id: `${orderId}-${index}`,
-            orderId: orderId,
             name: username,
             email: email,
             date: currentDate,
             product: item.name,
             quantity: item.quantity,
-            price: item.price,
-            status: 'new'
+            price: item.price
         });
     });
     localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
@@ -112,7 +108,7 @@ function checkout() {
     totalPrice = 0;  // Reset total price
     updateCartAmount();  // Update the cart icon count
     updateCartDisplay();  // Update the cart display
-    window.location.href = "delivery.html";  // Redirect to delivery page instead of admin
+    window.location.href = "admin.html";  
 }
 
 // Clear Cart functionality

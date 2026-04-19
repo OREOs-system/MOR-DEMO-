@@ -1,20 +1,4 @@
 let orders = JSON.parse(localStorage.getItem('orders')) || [];  // Retrieve orders from localStorage
-orders = orders.map(order => ({ ...order, status: order.status || 'new' }));
-
-function getStatusLabel(status) {
-    switch (status) {
-        case 'new':
-            return 'Awaiting Admin';
-        case 'accepted':
-            return 'Pending';
-        case 'completed':
-            return 'Completed';
-        case 'cancelled':
-            return 'Cancelled';
-        default:
-            return 'Unknown';
-    }
-}
 
 // Function to display orders
 function displayOrders() {
@@ -28,38 +12,24 @@ function displayOrders() {
 
     let ordersHTML = '<table style="width:100%; border-collapse: collapse;">';
     ordersHTML += '<tr style="border: 1px solid #ddd; padding: 8px;">';
-    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Order ID</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Name</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Email</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Date</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Quantity</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Price</th>';
-    ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Status</th>';
     ordersHTML += '<th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Action</th>';
     ordersHTML += '</tr>';
     
     orders.forEach((order, index) => {
         ordersHTML += '<tr style="border: 1px solid #ddd;">';
-        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.orderId || order.id || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.name || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.email || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.date || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.product || order.name || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${order.quantity || 'N/A'}</td>`;
         ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">₱${order.price || 'N/A'}</td>`;
-        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${getStatusLabel(order.status)}</td>`;
-
-        let actionHTML = '';
-        if (order.status === 'new') {
-            actionHTML = `<button onclick="acceptOrder(${index})">Accept</button> <button onclick="refuseOrder(${index})">Refuse</button>`;
-        } else if (order.status === 'accepted') {
-            actionHTML = `<button onclick="completeOrder(${index})">Done</button>`;
-        } else {
-            actionHTML = `<span style="font-weight: bold;">${getStatusLabel(order.status)}</span>`;
-        }
-
-        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;">${actionHTML}</td>`;
+        ordersHTML += `<td style="border: 1px solid #ddd; padding: 8px;"><button onclick="removeOrder(${index})">Remove</button></td>`;
         ordersHTML += '</tr>';
     });
     ordersHTML += '</table>';
@@ -67,37 +37,11 @@ function displayOrders() {
     ordersContainer.innerHTML = ordersHTML;
 }
 
-function saveOrders() {
-    localStorage.setItem('orders', JSON.stringify(orders));
-}
-
-function clearAllOrders() {
-    if (!confirm('Are you sure you want to clear all transaction history? This will remove every order permanently.')) {
-        return;
-    }
-
-    orders = [];
-    saveOrders();
-    displayOrders();
-    alert('All transaction history has been cleared.');
-}
-
-function acceptOrder(index) {
-    orders[index].status = 'accepted';
-    saveOrders();
-    displayOrders();
-}
-
-function refuseOrder(index) {
-    orders[index].status = 'cancelled';
-    saveOrders();
-    displayOrders();
-}
-
-function completeOrder(index) {
-    orders[index].status = 'completed';
-    saveOrders();
-    displayOrders();
+// Function to remove an order
+function removeOrder(index) {
+    orders.splice(index, 1);  // Remove the order from the orders array
+    localStorage.setItem('orders', JSON.stringify(orders));  // Update localStorage
+    displayOrders();  // Update the orders display
 }
 
 // Initial orders display
