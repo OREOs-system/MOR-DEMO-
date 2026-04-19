@@ -1,97 +1,296 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
-
-*{
-  font-family: 'Poppins', sans-serif;
-  margin:0; padding:0;
-  box-sizing: border-box;
-  outline: none; border:none;
-  text-transform: capitalize;
-  transition: all .2s linear;
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-.container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding:25px;
-  min-height: 100vh;
-  background: linear-gradient(90deg, #d35d0e 60%, #dd7e12 40.1%);
+/* Body styling */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    background-image: url('BG.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.container form{
-  padding:20px;
-  width:700px;
-  background: #fff;
-  box-shadow: 0 5px 10px rgba(0,0,0,.1);
+/* Navigation Bar */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(201, 200, 180, 0.7);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    height: 80px;
+    z-index: 10;
 }
 
-.container form .row{
-  display: flex;
-  flex-wrap: wrap;
-  gap:15px;
+.nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    width: 100%;
 }
 
-.container form .row .col{
-  flex:1 1 250px;
+.nav a {
+    padding: 0 20px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
 }
 
-.container form .row .col .title{
-  font-size: 20px;
-  color:#333;
-  padding-bottom: 5px;
-  text-transform: uppercase;
+.nav a:after{
+    content: "";
+    position:absolute;
+    background-color: chocolate;
+    height: 5px;
+    width: 0%;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
 }
 
-.container form .row .col .inputBox{
-  margin:15px 0;
+.nav a:hover{
+    background: chocolate;
+    padding: 5px;
+    border-radius: 2rem;
+    color: bisque;
+    transition:  0.5s ease;
 }
 
-.container form .row .col .inputBox span{
-  margin-bottom: 10px;
-  display: block;
+.nav .logo h1{
+    font-size: 45px;
+    font-weight: 600;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(14, 13, 13);
 }
 
-.container form .row .col .inputBox input{
-  width: 100%;
-  border:1px solid #ccc;
-  padding:10px 15px;
-  font-size: 15px;
-  text-transform: none;
+.nav .logo b{
+    color: chocolate;
 }
 
-.container form .row .col .inputBox input:focus{
-  border:1px solid #000;
+.nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.container form .row .col .flex{
-  display: flex;
-  gap:15px;
+.nav ul li{
+    height: 50px;
 }
 
-.container form .row .col .flex .inputBox{
-  margin-top: 5px;
+.nav ul li a{
+    height: 100%;
+    display: flex;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 1000;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    align-items: center;
 }
 
-.container form .row .col .inputBox img{
-  height: 34px;
-  margin-top: 5px;
-  filter: drop-shadow(0 0 1px #000);
+/* ACTIVE */
+.nav ul .active::after{
+    content: '';
+    width: 50%;
+    height: 3px;
+    background-color: rgb(15, 14, 14);
+    display: flex;
+    position: relative;
+    margin-left: 10px;
 }
 
-.container form .submit-btn{
-  width: 100%;
-  padding:12px;
-  font-size: 17px;
-  background: #ae8327;
-  color:#fff;
-  margin-top: 5px;
-  cursor: pointer;
+/* Container */
+.container {
+    background-color: white;
+    opacity: 0.9;
+    margin: 100px auto 40px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
 }
 
-.container form .submit-btn:hover{
-  background: #dd5414;
+.container form {
+    width: 100%;
 }
+
+.container form .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.container form .row .col {
+    flex: 1 1 300px;
+}
+
+.container form .row .col .title {
+    font-size: 24px;
+    color: #333;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ce871c;
+    margin-bottom: 20px;
+}
+
+.container form .row .col .inputBox {
+    margin: 20px 0;
+}
+
+.container form .row .col .inputBox span {
+    margin-bottom: 10px;
+    display: block;
+    font-weight: 500;
+    color: #555;
+}
+
+.container form .row .col .inputBox input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.container form .row .col .inputBox input:focus {
+    border-color: #ce871c;
+    box-shadow: 0 0 5px rgba(206, 135, 28, 0.3);
+}
+
+.container form .row .col .inputBox input::placeholder {
+    color: #999;
+}
+
+.container form .row .col .flex {
+    display: flex;
+    gap: 15px;
+}
+
+.container form .row .col .flex .inputBox {
+    flex: 1;
+}
+
+.container form .row .col .inputBox img {
+    height: 40px;
+    margin-top: 5px;
+    filter: drop-shadow(0 0 1px #000);
+    border-radius: 4px;
+}
+
+/* Radio button styling */
 input[type="radio"] {
-    transform: scale(1.5); /* Increases the size of the radio button */
-        margin-right: 10px; /* Space between the radio button and text */
-     }
+    transform: scale(1.2);
+    margin-right: 10px;
+    accent-color: #ce871c;
+}
+
+.container form .row .col .inputBox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #ce871c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    background-color: #b87316;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(206, 135, 28, 0.3);
+}
+
+/* Form validation */
+input:invalid:not(:placeholder-shown) {
+    border-color: #e74c3c;
+}
+
+input:valid:not(:placeholder-shown) {
+    border-color: #27ae60;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav {
+        height: 60px;
+    }
+
+    .nav .logo h1 {
+        font-size: 35px;
+    }
+
+    .nav ul li a {
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .container {
+        margin: 80px 20px 40px;
+        padding: 20px;
+    }
+
+    .container form .row {
+        gap: 20px;
+    }
+
+    .container form .row .col {
+        flex: 1 1 100%;
+    }
+
+    .container form .row .col .title {
+        font-size: 20px;
+    }
+
+    .container form .row .col .inputBox input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container form .row .col .flex {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .container form .row .col .flex .inputBox {
+        margin-bottom: 15px;
+    }
+}
