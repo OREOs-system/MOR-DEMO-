@@ -237,3 +237,36 @@ body::before {
         width: 100%;
     }
 }
+
+/* Admin Navigation */
+.admin-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.admin-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: rgba(115, 85, 56, 0.15);
+    color: #3c2d26;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.admin-link:hover {
+    background: rgba(115, 85, 56, 0.25);
+    transform: translateY(-2px);
+}
+
+.admin-link.active {
+    background: linear-gradient(135deg, #b36a25 0%, #d97f2d 100%);
+    color: white;
+    border-color: #d97f2d;
+}
+

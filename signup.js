@@ -27,9 +27,33 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // Generate a simple user_id and save user data to localStorage
+    // Get existing users array
+    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+    
+    // Check if email already exists
+    if (allUsers.some(u => u.email === email)) {
+        errorMessage.textContent = 'Email already registered!';
+        return;
+    }
+
+    // Generate a simple user_id and create new user
     const user_id = 'USER_' + Date.now();
-    localStorage.setItem('user', JSON.stringify({ user_id, username, email, password }));
+    const newUser = {
+        user_id: user_id,
+        username: username,
+        email: email,
+        password: password,
+        role: 'user',
+        profilePicture: 'default-profile.png',
+        createdAt: new Date().toLocaleDateString()
+    };
+
+    // Add to users array
+    allUsers.push(newUser);
+    localStorage.setItem('allUsers', JSON.stringify(allUsers));
+    
+    // Also set current user for login
+    localStorage.setItem('user', JSON.stringify(newUser));
 
     // Redirect to login page or success message
     alert('Registration successful! Please login.');

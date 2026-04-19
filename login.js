@@ -7,18 +7,29 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Simulate checking login details
-    const storedUser = JSON.parse(localStorage.getItem('user')); // Retrieve stored user data
+    // Get all users from localStorage
+    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
 
-    // Check if the user exists and if the username, email, and password match
-    if (storedUser && storedUser.username === username && storedUser.email === email && storedUser.password === password) {
-        // Store user information in localStorage
-        localStorage.setItem('user_id', storedUser.user_id); // Store user_id
-        localStorage.setItem('username', storedUser.username); // Store username
-        localStorage.setItem('email', storedUser.email); // Store email
+    // Find user matching username, email, and password
+    const foundUser = allUsers.find(u => 
+        u.username === username && 
+        u.email === email && 
+        u.password === password
+    );
 
-        // If login is successful, redirect to the account page
-        window.location.href = "mainpage.html";  // Replace with the appropriate URL for your main page
+    if (foundUser) {
+        // Store current user information in localStorage
+        localStorage.setItem('user', JSON.stringify(foundUser));
+        localStorage.setItem('user_id', foundUser.user_id);
+        localStorage.setItem('username', foundUser.username);
+        localStorage.setItem('email', foundUser.email);
+
+        // If login is successful, redirect to the appropriate page
+        if (foundUser.role === 'admin') {
+            window.location.href = "admin.html";  // Admin panel
+        } else {
+            window.location.href = "mainpage.html";  // Regular user home
+        }
     } else {
         // Show error message if login fails
         alert('Invalid username, email, or password.');
