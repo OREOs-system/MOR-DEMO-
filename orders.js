@@ -14,14 +14,30 @@ function getStatusInfo(status) {
     }
 }
 
+function normalizeOrders(orders) {
+    let changed = false;
+    orders.forEach((order, index) => {
+        if (!order.orderId) {
+            order.orderId = `legacy_${order.email || 'guest'}_${order.date || index}_${index}`;
+            changed = true;
+        }
+        if (!order.status) {
+            order.status = 'new';
+            changed = true;
+        }
+    });
+    if (changed) {
+        localStorage.setItem('orders', JSON.stringify(orders));
+    }
+}
+
 // Display welcome message for recent order
 function displayWelcomeMessage() {
     const messageElement = document.getElementById('orderMessage');
     const recentOrderTime = sessionStorage.getItem('recentOrderTime');
     
     if (recentOrderTime) {
-        const timeDiff = Date.now() - parseInt(recentOrderTime);
-        // Show message for 5 minutes after checkout
+        const timeDiff = Date.now() - parseInt(recentOrderTime, 10);
         if (timeDiff < 300000) {
             messageElement.innerHTML = `
                 <div class="success-box">
@@ -51,6 +67,7 @@ function displayOrders() {
     }
     
     const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    normalizeOrders(orders);
     const userOrders = orders.filter(order => order.email === email);
     
     if (userOrders.length === 0) {
@@ -63,7 +80,6 @@ function displayOrders() {
         return;
     }
     
-    // Group orders by orderId
     const groupedOrders = {};
     userOrders.forEach(order => {
         if (!groupedOrders[order.orderId]) {
@@ -116,6 +132,7 @@ function displayOrders() {
                     </div>
                     <div class="order-actions">
                         <button onclick="viewOrderDetails('${orderId}')" class="btn-details">View Details</button>
+                        ${firstOrder.status === 'new' ? `<button onclick="cancelOrder('${orderId}')" class="btn-cancel">Cancel Order</button>` : ''}
                     </div>
                 </div>
             </div>
@@ -123,6 +140,28 @@ function displayOrders() {
     });
     
     ordersContainer.innerHTML = ordersHTML;
+}
+
+function cancelOrder(orderId) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderGroup = orders.filter(order => order.orderId === orderId);
+    if (orderGroup.length === 0) {
+        alert('Order not found.');
+        return;
+    }
+    const firstOrder = orderGroup[0];
+    if (firstOrder.status !== 'new') {
+        alert('This order cannot be cancelled after the admin has reviewed it.');
+        return;
+    }
+    orders.forEach(order => {
+        if (order.orderId === orderId) {
+            order.status = 'cancelled';
+        }
+    });
+    localStorage.setItem('orders', JSON.stringify(orders));
+    displayOrders();
+    alert('Your order has been cancelled.');
 }
 
 // View detailed information for a specific order

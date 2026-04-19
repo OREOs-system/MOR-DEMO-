@@ -72,43 +72,53 @@ function removeItem(itemName) {
     }
 }
 
+function generateOrderId() {
+    return `order_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
+}
+
 // Checkout functionality
 function checkout() {
-    alert('Proceeding to checkout');
-    
-    // Get current user information
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add items before checking out.');
+        return;
+    }
+
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
-    
+
     if (!username || !email) {
         alert('User information not found. Please login again.');
         window.location.href = 'login.html';
         return;
     }
-    
-    // Get current date
+
     const currentDate = new Date().toLocaleString();
-    
-    // Save the cart items to orders in localStorage with user info and date
+    const orderId = generateOrderId();
+
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
     cart.forEach(item => {
         orders.push({
+            orderId,
             name: username,
             email: email,
             date: currentDate,
             product: item.name,
             quantity: item.quantity,
-            price: item.price
+            price: item.price,
+            status: 'new'
         });
     });
-    localStorage.setItem('orders', JSON.stringify(orders));  // Save orders to localStorage
 
-    localStorage.removeItem('cart');  // Clear the cart in localStorage
-    cart = [];  // Reset the cart arrays
-    totalPrice = 0;  // Reset total price
-    updateCartAmount();  // Update the cart icon count
-    updateCartDisplay();  // Update the cart display
-    window.location.href = "admin.html";  
+    localStorage.setItem('orders', JSON.stringify(orders));
+    sessionStorage.setItem('recentOrderTime', Date.now().toString());
+
+    localStorage.removeItem('cart');
+    cart = [];
+    totalPrice = 0;
+    updateCartAmount();
+    updateCartDisplay();
+
+    window.location.href = 'orders.html';
 }
 
 // Clear Cart functionality
