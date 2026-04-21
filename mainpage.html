@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="menu.css">
-    <link rel="stylesheet" href="menu.js">
+    <script src="menu.js"></script>
     <link rel="stylesheet" href="cart.css">
     <title>MCCoffeeandTea</title>
     <style>
@@ -44,7 +44,7 @@
             
             if (username) {
                 userProfileLink.textContent = username; // Set the link text to the username
-                userProfileLink.href = "profile.html"; // Change the link to the profile page
+                userProfileLink.href = "account.html"; // Change the link to the account page
             } else {
                 userProfileLink.textContent = "Account"; // Default text
                 userProfileLink.href = "account.html"; // Default link
@@ -67,10 +67,10 @@
                     <button>Explore Food<i class="fa-solid fa-arrow-right"></i></button>
                 </a>
             </div>     
-            <sectio class="home swiper" id="home">
+            <section class="home swiper" id="home">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide container">
-                        <img src="ricebowlnobg.png" alt="">
+                        <img src="cheesyricebowl.jpg" alt="">
         
                     </div>
                     <div class="swiper-slide container">
@@ -101,7 +101,7 @@
                   <div class="swiper-button-next"></div>
                   <div class="swiper-button-prev"></div>
         
-             </sectio>
+             </section>
              
              <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         
@@ -135,7 +135,7 @@
                     
                 </div>
                 <div class="card">
-                    <img src="Sandwich.jpg" alt="">
+                    <img src="cheesytuna.jpg" alt="">
                     <div class="food-title">
                         <h1>Cheesy Tuna Sandwich</h1>
                     </div>
@@ -227,7 +227,7 @@
                         </a>
                     </div>
                     <div class="box box8" onclick="toggleMenu('menu8')">
-                        <img src="ricemeal.jpg" alt="Rice Bowl">
+                        <img src="cheesyricebowl.jpg" alt="Rice Bowl">
                         <h2>Rice Bowl</h2>
                         <span>2 Items</span>
                         <a href="menu.html#menu8">
