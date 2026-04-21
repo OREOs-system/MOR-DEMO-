@@ -40,16 +40,7 @@ function loginUser (username) {
   updateNavBar();
 }
 function updateNavBar() {
-  const username = sessionStorage.getItem('username');
-  const userProfileLink = document.getElementById('user-profile');
-  
-  if (username) {
-      userProfileLink.textContent = username; // Set the link text to the username
-      userProfileLink.href = "profile.html"; // Change the link to the profile page
-  } else {
-      userProfileLink.textContent = "Account"; // Default text
-      userProfileLink.href = "account.html"; // Default link
-  }
+  // Profile functionality removed - all users link to account.html
 }
 
 // Call this function when the page loads
