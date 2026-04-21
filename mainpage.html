@@ -33,6 +33,11 @@
         </div>
     </section >
     <script>
+        // Sync sessionStorage with localStorage for username
+        if (!sessionStorage.getItem('username') && localStorage.getItem('username')) {
+            sessionStorage.setItem('username', localStorage.getItem('username'));
+        }
+        
         function updateNavBar() {
             const username = sessionStorage.getItem('username');
             const userProfileLink = document.getElementById('user-profile');

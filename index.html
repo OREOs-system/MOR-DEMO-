@@ -293,5 +293,11 @@
 
     
 
+    <script>
+        // Check if user is logged in, redirect to mainpage.html
+        if (localStorage.getItem('username')) {
+            window.location.href = 'mainpage.html';
+        }
+    </script>
 </body>
 </html>
