@@ -188,6 +188,11 @@ Email: ${firstOrder.email}
 
 Status: ${statusInfo.label}
 
+Payment Method: ${firstOrder.paymentMethod || 'N/A'}
+${firstOrder.gcashNumber ? `GCash Number: ${firstOrder.gcashNumber}` : ''}
+${firstOrder.paymentReference && firstOrder.paymentReference !== 'N/A' ? `Reference: ${firstOrder.paymentReference}` : ''}
+${firstOrder.paymentAmount ? `Payment Amount: ₱${firstOrder.paymentAmount}` : ''}
+
 Items:
 `;
     

@@ -92,33 +92,11 @@ function checkout() {
         return;
     }
 
-    const currentDate = new Date().toLocaleString();
-    const orderId = generateOrderId();
+    // Store cart in sessionStorage for payment page
+    sessionStorage.setItem('paymentCart', JSON.stringify(cart));
 
-    let orders = JSON.parse(localStorage.getItem('orders')) || [];
-    cart.forEach(item => {
-        orders.push({
-            orderId,
-            name: username,
-            email: email,
-            date: currentDate,
-            product: item.name,
-            quantity: item.quantity,
-            price: item.price,
-            status: 'new'
-        });
-    });
-
-    localStorage.setItem('orders', JSON.stringify(orders));
-    sessionStorage.setItem('recentOrderTime', Date.now().toString());
-
-    localStorage.removeItem('cart');
-    cart = [];
-    totalPrice = 0;
-    updateCartAmount();
-    updateCartDisplay();
-
-    window.location.href = 'orders.html';
+    // Redirect to payment page
+    window.location.href = 'payment.html';
 }
 
 // Clear Cart functionality
