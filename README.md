@@ -8,16 +8,28 @@ This repository is a static frontend project with a simple Node.js/Express serve
 
 - User registration and login
 - Menu browsing and cart management
-- **GCash Payment Integration**: Secure online payment processing before order placement
+- **Payment Options**: Choose between Online Payment (GCash) or Cash on Delivery
 - Order tracking and management
 
-### Payment Flow
+### Payment Methods
+
+1. **Online Payment (GCash)**:
+   - Secure online payment through GCash
+   - Must pay full amount before order processing
+   - Redirects to payment page for transaction
+
+2. **Cash on Delivery**:
+   - Pay in cash when order is delivered
+   - Order placed immediately
+   - No upfront payment required
+
+### Order Flow
 
 1. Add items to cart
-2. Click "Checkout" to proceed to payment
-3. Enter GCash mobile number and confirm payment
-4. Payment must cover the full order amount
-5. Order is placed only after successful payment
+2. Choose payment method:
+   - **Online Payment**: Redirects to GCash payment page
+   - **Cash on Delivery**: Order placed immediately
+3. Track order status in orders page
 
 ### Run locally
 

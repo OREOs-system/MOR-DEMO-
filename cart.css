@@ -351,6 +351,79 @@ body {
     background-color: #c82333;
 }
 
+/* Payment Options */
+.payment-options {
+    margin-bottom: 20px;
+}
+
+.payment-options h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.payment-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.online-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.online-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.cash-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.cash-btn:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.payment-btn i {
+    font-size: 20px;
+}
+
+/* Responsive Design for Payment Options */
+@media (max-width: 768px) {
+    .payment-methods {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
 /* Payment Form Styles */
 .payment-form {
     display: grid;
@@ -547,5 +620,78 @@ body {
 @media (max-width: 500px) {
     .shopping-cart {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Payment Options */
+.payment-options {
+    margin-bottom: 20px;
+}
+
+.payment-options h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.payment-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.online-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.online-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.cash-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.cash-btn:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.payment-btn i {
+    font-size: 20px;
+}
+
+/* Responsive Design for Payment Options */
+@media (max-width: 768px) {
+    .payment-methods {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .payment-btn {
+        width: 100%;
+        max-width: 300px;
     }
 }

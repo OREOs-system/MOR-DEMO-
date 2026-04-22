@@ -37,7 +37,17 @@ function updateCartDisplay() {
     document.getElementById('shopping-cart').innerHTML = cartHTML;
     document.getElementById('label').innerHTML = `
         <h2>Total: ₱${totalPrice}</h2>
-        <button onclick="checkout()">Checkout</button>
+        <div class="payment-options">
+            <h3>Choose Payment Method</h3>
+            <div class="payment-methods">
+                <button onclick="selectPaymentMethod('online')" class="payment-btn online-btn">
+                    <i class="bi bi-phone"></i> Online Payment (GCash)
+                </button>
+                <button onclick="selectPaymentMethod('cash')" class="payment-btn cash-btn">
+                    <i class="bi bi-cash"></i> Cash on Delivery
+                </button>
+            </div>
+        </div>
         <button onclick="clearCart()">Clear Cart</button>
     `;
 }
@@ -77,6 +87,69 @@ function generateOrderId() {
 }
 
 // Checkout functionality
+// Function to handle payment method selection
+function selectPaymentMethod(method) {
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add items before selecting payment method.');
+        return;
+    }
+
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+
+    if (!username || !email) {
+        alert('User information not found. Please login again.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    if (method === 'online') {
+        // Store cart in sessionStorage for payment page
+        sessionStorage.setItem('paymentCart', JSON.stringify(cart));
+        // Redirect to payment page
+        window.location.href = 'payment.html';
+    } else if (method === 'cash') {
+        // Process Cash on Delivery directly
+        processCashOnDelivery();
+    }
+}
+//
+// Process Cash on Delivery order
+function processCashOnDelivery() {
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    const currentDate = new Date().toLocaleString();
+    const orderId = generateOrderId();
+
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    cart.forEach(item => {
+        orders.push({
+            orderId,
+            name: username,
+            email: email,
+            date: currentDate,
+            product: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            status: 'new',
+            paymentMethod: 'Cash on Delivery',
+            paymentAmount: item.price
+        });
+    });
+
+    localStorage.setItem('orders', JSON.stringify(orders));
+    sessionStorage.setItem('recentOrderTime', Date.now().toString());
+
+    localStorage.removeItem('cart');
+    cart = [];
+    totalPrice = 0;
+    updateCartAmount();
+    updateCartDisplay();
+
+    alert('Order placed successfully! You will pay ₱' + totalPrice + ' in cash upon delivery.');
+    window.location.href = 'orders.html';
+}
+//
 function checkout() {
     if (cart.length === 0) {
         alert('Your cart is empty. Add items before checking out.');
@@ -97,6 +170,69 @@ function checkout() {
 
     // Redirect to payment page
     window.location.href = 'payment.html';
+}
+
+// Function to handle payment method selection
+function selectPaymentMethod(method) {
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add items before selecting payment method.');
+        return;
+    }
+
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+
+    if (!username || !email) {
+        alert('User information not found. Please login again.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    if (method === 'online') {
+        // Store cart in sessionStorage for payment page
+        sessionStorage.setItem('paymentCart', JSON.stringify(cart));
+        // Redirect to payment page
+        window.location.href = 'payment.html';
+    } else if (method === 'cash') {
+        // Process Cash on Delivery directly
+        processCashOnDelivery();
+    }
+}
+
+// Process Cash on Delivery order
+function processCashOnDelivery() {
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
+    const currentDate = new Date().toLocaleString();
+    const orderId = generateOrderId();
+
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    cart.forEach(item => {
+        orders.push({
+            orderId,
+            name: username,
+            email: email,
+            date: currentDate,
+            product: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            status: 'new',
+            paymentMethod: 'Cash on Delivery',
+            paymentAmount: item.price
+        });
+    });
+
+    localStorage.setItem('orders', JSON.stringify(orders));
+    sessionStorage.setItem('recentOrderTime', Date.now().toString());
+
+    localStorage.removeItem('cart');
+    cart = [];
+    totalPrice = 0;
+    updateCartAmount();
+    updateCartDisplay();
+
+    alert('Order placed successfully! You will pay ₱' + totalPrice + ' in cash upon delivery.');
+    window.location.href = 'orders.html';
 }
 
 // Clear Cart functionality
