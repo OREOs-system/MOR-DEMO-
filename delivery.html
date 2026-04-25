@@ -20,37 +20,42 @@
     </section>
 
     <div class="container">
-        <form action="">
+        <form onsubmit="saveDeliveryAddress(event)">
             <div class="row">
                 <div class="col">
                     <h3 class="title"> Delivery address</h3>
 
                     <div class="inputBox">
                         <span>full name :</span>
-                        <input type="text" placeholder="john deo" required>
+                        <input type="text" id="deliveryFullName" placeholder="john deo" required>
                     </div>
                     <div class="inputBox">
                         <span>email :</span>
-                        <input type="email" placeholder="example@example.com" required>
+                        <input type="email" id="deliveryEmail" placeholder="example@example.com" required>
                     </div>
                     <div class="inputBox">
                         <span>address :</span>
-                        <input type="text" placeholder="Blk - street - locality" required>
+                        <input type="text" id="deliveryAddress" placeholder="Blk - street - locality" required>
                     </div>
                     <div class="inputBox">
                         <span>city :</span>
-                        <input type="text" placeholder="" required>
+                        <input type="text" id="deliveryCity" placeholder="" required>
                     </div>
 
                     <div class="flex">
                         <div class="inputBox">
                             <span>state :</span>
-                            <input type="text" placeholder="Philippines" required>
+                            <input type="text" id="deliveryState" value="Philippines" required>
                         </div>
                         <div class="inputBox">
                             <span>zip code :</span>
-                            <input type="text" placeholder="123 456" required>
+                            <input type="text" id="deliveryZip" placeholder="123 456" required>
                         </div>
+                    </div>
+
+                    <div class="map-box">
+                        <h4>Your delivery location</h4>
+                        <iframe id="deliveryMap" src="https://www.google.com/maps?q=Philippines&output=embed" loading="lazy"></iframe>
                     </div>
                 </div>
 
@@ -83,5 +88,6 @@
         </form>
     </div>
 
+    <script src="delivery.js"></script>
 </body>
 </html>

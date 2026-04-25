@@ -4,6 +4,9 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     // Get values from the form fields
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const zipCode = document.getElementById('zipCode').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const errorMessage = document.getElementById('error-message');
@@ -12,7 +15,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     errorMessage.textContent = '';
 
     // Validation checks
-    if (!username || !email || !password || !confirmPassword) {
+    if (!username || !email || !address || !city || !zipCode || !password || !confirmPassword) {
         errorMessage.textContent = 'All fields are required!';
         return;
     }
@@ -42,6 +45,9 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         user_id: user_id,
         username: username,
         email: email,
+        address: address,
+        city: city,
+        zipCode: zipCode,
         password: password,
         role: 'user',
         profilePicture: 'default-profile.png',

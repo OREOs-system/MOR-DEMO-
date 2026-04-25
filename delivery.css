@@ -218,6 +218,24 @@ input[type="radio"] {
     color: white;
     border: none;
     border-radius: 8px;
+}
+
+.map-box {
+    margin-top: 20px;
+}
+
+.map-box h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.map-box iframe {
+    width: 100%;
+    min-height: 240px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 30px;

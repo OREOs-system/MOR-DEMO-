@@ -75,6 +75,17 @@ img {
     margin-right: 10px;
 }
 
+.map-container {
+    margin-top: 15px;
+}
+
+.map-container iframe {
+    width: 100%;
+    min-height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
 #twoFactorAuth {
     margin-left: 10px;
 }

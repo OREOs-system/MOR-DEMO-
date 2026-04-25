@@ -7,22 +7,38 @@ window.onload = function() {
         document.getElementById('usernameDisplay').textContent = storedUser.username;
         document.getElementById('emailDisplay').textContent = storedUser.email;
         document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
+        document.getElementById('addressDisplay').textContent = storedUser.address || 'No address saved';
+        document.getElementById('cityDisplay').textContent = storedUser.city || 'N/A';
+        document.getElementById('zipDisplay').textContent = storedUser.zipCode || 'N/A';
+        updateMap(storedUser.address, storedUser.city, storedUser.zipCode);
     } else {
         alert("You are not logged in.");
         window.location.href = "login.html";  // Redirect to login page if not logged in
     }
 };
 
+function saveUserChanges(updatedUser) {
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+    const index = allUsers.findIndex(u => u.user_id === updatedUser.user_id);
+    if (index !== -1) {
+        allUsers[index] = updatedUser;
+        localStorage.setItem('allUsers', JSON.stringify(allUsers));
+    }
+}
+
+function updateMap(address, city, zipCode) {
+    const query = encodeURIComponent([address, city, zipCode].filter(Boolean).join(', ') || 'Philippines');
+    document.getElementById('addressMap').src = `https://www.google.com/maps?q=${query}&output=embed`;
+}
+
 // Edit username
 function editUsername() {
     const newUsername = prompt("Enter new username:");
     if (newUsername) {
-        // Update username and save to localStorage
         const storedUser = JSON.parse(localStorage.getItem('user'));
         storedUser.username = newUsername;
-        localStorage.setItem('user', JSON.stringify(storedUser));
-
-        // Update the displayed username
+        saveUserChanges(storedUser);
         document.getElementById('usernameDisplay').textContent = newUsername;
     }
 }
@@ -31,15 +47,33 @@ function editUsername() {
 function editEmail() {
     const newEmail = prompt("Enter new email:");
     if (newEmail && validateEmail(newEmail)) {
-        // Update email and save to localStorage
         const storedUser = JSON.parse(localStorage.getItem('user'));
         storedUser.email = newEmail;
-        localStorage.setItem('user', JSON.stringify(storedUser));
-
-        // Update the displayed email
+        saveUserChanges(storedUser);
         document.getElementById('emailDisplay').textContent = newEmail;
     } else {
         alert("Please enter a valid email address.");
+    }
+}
+
+// Edit address details
+function editAddress() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const newAddress = prompt("Enter your street address:", storedUser.address || '');
+    const newCity = prompt("Enter your city:", storedUser.city || '');
+    const newZip = prompt("Enter your zip code:", storedUser.zipCode || '');
+
+    if (newAddress && newCity && newZip) {
+        storedUser.address = newAddress;
+        storedUser.city = newCity;
+        storedUser.zipCode = newZip;
+        saveUserChanges(storedUser);
+        document.getElementById('addressDisplay').textContent = newAddress;
+        document.getElementById('cityDisplay').textContent = newCity;
+        document.getElementById('zipDisplay').textContent = newZip;
+        updateMap(newAddress, newCity, newZip);
+    } else {
+        alert('Address, city, and zip code are required.');
     }
 }
 

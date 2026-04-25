@@ -18,6 +18,18 @@
             <p>Profile Picture: <img id="profilePic" src="default-profile.png" alt="Profile Picture" width="50"> <button onclick="changePicture()">Change Picture</button></p>
         </div>
 
+        <!-- Delivery Address Section -->
+        <div class="section">
+            <h2>Delivery Address</h2>
+            <p>Street Address: <span id="addressDisplay"></span> <button onclick="editAddress()">Edit</button></p>
+            <p>City: <span id="cityDisplay"></span></p>
+            <p>Zip Code: <span id="zipDisplay"></span></p>
+            <div class="map-container">
+                <h3>Location Preview</h3>
+                <iframe id="addressMap" src="https://www.google.com/maps?q=Philippines&output=embed" loading="lazy"></iframe>
+            </div>
+        </div>
+
         <!-- Password Management Section -->
         <div class="section">
             <h2>Password Management</h2>
