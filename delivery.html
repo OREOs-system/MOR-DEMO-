@@ -55,8 +55,12 @@
                     </div>
 
                     <div class="map-box">
-                        <h4>Click the map to place your delivery location</h4>
+                        <h4>📍 Set Your Delivery Location on Map</h4>
+                        <p class="map-instruction">Click on the map to place your delivery pin. You can drag the marker to adjust the location.</p>
                         <div id="deliveryMap" class="leaflet-map"></div>
+                        <div class="location-info">
+                            <span id="coordinatesDisplay">Location not set</span>
+                        </div>
                         <input type="hidden" id="deliveryLatitude">
                         <input type="hidden" id="deliveryLongitude">
                     </div>

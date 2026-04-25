@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
 // Create order
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const { items, totalAmount, paymentMethod, deliveryAddress, deliveryCity, deliveryZipCode, phone, notes } = req.body;
+    const { items, totalAmount, paymentMethod, deliveryAddress, deliveryCity, deliveryZipCode, deliveryLatitude, deliveryLongitude, phone, notes } = req.body;
     const userId = req.headers['x-user-id']; // In real app, extract from JWT
 
     const orderId = `ORD-${Date.now()}`;
@@ -25,6 +25,8 @@ router.post('/', verifyToken, async (req, res) => {
       deliveryAddress,
       deliveryCity,
       deliveryZipCode,
+      deliveryLatitude: parseFloat(deliveryLatitude) || null,
+      deliveryLongitude: parseFloat(deliveryLongitude) || null,
       phone,
       notes,
       paymentStatus: paymentMethod === 'cod' ? 'pending' : 'pending',

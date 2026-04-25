@@ -263,6 +263,7 @@ input[type="radio"] {
     background-color: #b36012;
 }
 
+.submit-btn {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 30px;
@@ -275,6 +276,32 @@ input[type="radio"] {
     background-color: #b87316;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(206, 135, 28, 0.3);
+}
+
+/* Map instructions and location info */
+.map-instruction {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fffbea;
+    border-left: 3px solid #ce871c;
+    border-radius: 4px;
+}
+
+.location-info {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+#coordinatesDisplay {
+    font-weight: 600;
+    color: #ce871c;
 }
 
 /* Form validation */

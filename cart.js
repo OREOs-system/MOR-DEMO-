@@ -106,11 +106,13 @@ function selectPaymentMethod(method) {
     if (method === 'online') {
         // Store cart in sessionStorage for payment page
         sessionStorage.setItem('paymentCart', JSON.stringify(cart));
-        // Redirect to payment page
-        window.location.href = 'payment.html';
+        sessionStorage.setItem('paymentMethod', 'online');
+        // Redirect to delivery address page first
+        window.location.href = 'delivery.html';
     } else if (method === 'cash') {
-        // Process Cash on Delivery directly
-        processCashOnDelivery();
+        // Store payment method and go to delivery for cash on delivery
+        sessionStorage.setItem('paymentMethod', 'cash');
+        window.location.href = 'delivery.html';
     }
 }
 //
@@ -118,8 +120,15 @@ function selectPaymentMethod(method) {
 function processCashOnDelivery() {
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
+    const user = JSON.parse(localStorage.getItem('user')) || {};
     const currentDate = new Date().toLocaleString();
     const orderId = generateOrderId();
+
+    // Check if delivery location is set
+    if (!user.latitude || !user.longitude) {
+        alert('Delivery location not set. Please set your delivery address first.');
+        return;
+    }
 
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
     cart.forEach(item => {
@@ -133,7 +142,12 @@ function processCashOnDelivery() {
             price: item.price,
             status: 'new',
             paymentMethod: 'Cash on Delivery',
-            paymentAmount: item.price
+            paymentAmount: item.price,
+            deliveryAddress: user.address || '',
+            deliveryCity: user.city || '',
+            deliveryZip: user.zipCode || '',
+            latitude: user.latitude,
+            longitude: user.longitude
         });
     });
 
