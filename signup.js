@@ -6,13 +6,16 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const contact = document.getElementById('contact').value;
     const errorMessage = document.getElementById('error-message');
 
     // Clear previous error message
     errorMessage.textContent = '';
 
     // Validation checks
-    if (!username || !email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword || !address || !city || !contact) {
         errorMessage.textContent = 'All fields are required!';
         return;
     }
@@ -45,9 +48,9 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         password: password,
         role: 'user',
         profilePicture: 'default-profile.png',
-        address: '',
-        city: '',
-        contact: '',
+        address: address,
+        city: city,
+        contact: contact,
         createdAt: new Date().toLocaleDateString()
     };
 
