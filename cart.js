@@ -118,6 +118,7 @@ function selectPaymentMethod(method) {
 function processCashOnDelivery() {
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
+    const user = JSON.parse(localStorage.getItem('user')) || {};
     const currentDate = new Date().toLocaleString();
     const orderId = generateOrderId();
 
@@ -127,6 +128,9 @@ function processCashOnDelivery() {
             orderId,
             name: username,
             email: email,
+            address: user.address || '',
+            city: user.city || '',
+            contact: user.contact || '',
             date: currentDate,
             product: item.name,
             quantity: item.quantity,

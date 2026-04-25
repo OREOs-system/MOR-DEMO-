@@ -64,6 +64,7 @@ function processSuccessfulPayment(gcashNumber, amount, reference) {
     // Now place the order (similar to original checkout function)
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
+    const user = JSON.parse(localStorage.getItem('user')) || {};
 
     if (!username || !email) {
         alert('User information not found. Please login again.');
@@ -80,6 +81,9 @@ function processSuccessfulPayment(gcashNumber, amount, reference) {
             orderId,
             name: username,
             email: email,
+            address: user.address || '',
+            city: user.city || '',
+            contact: user.contact || '',
             date: currentDate,
             product: item.name,
             quantity: item.quantity,

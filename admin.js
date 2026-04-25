@@ -64,9 +64,11 @@ function displayOrders() {
                 <div class="admin-order-header">
                     <div>
                         <h3>Order #${orderId}</h3>
-                        <p><strong>Customer:</strong> ${firstOrder.name || 'N/A'}</p>
-                        <p><strong>Email:</strong> ${firstOrder.email || 'N/A'}</p>
-                        <p><strong>Date:</strong> ${firstOrder.date || 'N/A'}</p>
+                        <p>Customer: ${firstOrder.name || 'N/A'}</p>
+                        <p>Email: ${firstOrder.email || 'N/A'}</p>
+                        <p>Address: ${firstOrder.address || 'N/A'}</p>
+                        <p>Contact: ${firstOrder.contact || 'N/A'}</p>
+                        <p>Date: ${firstOrder.date || 'N/A'}</p>
                     </div>
                     <div class="status-badge ${statusInfo.class}">
                         <span class="status-icon">${statusInfo.icon}</span>
