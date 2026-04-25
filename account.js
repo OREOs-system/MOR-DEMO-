@@ -1,7 +1,7 @@
 let accountMap;
 let accountMarker;
 
-window.onload = function() {
+window.addEventListener('load', function() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
 
     if (storedUser) {
@@ -18,7 +18,7 @@ window.onload = function() {
         alert("You are not logged in.");
         window.location.href = "login.html";
     }
-};
+});
 
 function saveUserChanges(updatedUser) {
     localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -55,8 +55,17 @@ function setAccountMarker(lat, lng, save) {
     if (accountMarker) {
         accountMarker.setLatLng([lat, lng]);
     } else {
-        accountMarker = L.marker([lat, lng]).addTo(accountMap);
+        accountMarker = L.marker([lat, lng], {
+            draggable: true,
+            title: 'Drag to adjust location'
+        }).addTo(accountMap);
+
+        accountMarker.on('dragend', function(event) {
+            const markerPos = event.target.getLatLng();
+            setAccountMarker(markerPos.lat, markerPos.lng, true);
+        });
     }
+
     accountMap.setView([lat, lng], 15);
 
     document.getElementById('latitudeDisplay').textContent = lat.toFixed(6);
