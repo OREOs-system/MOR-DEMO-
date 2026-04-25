@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- custom css file link  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="delivery.css">
 </head>
 <body>
@@ -54,20 +55,10 @@
                     </div>
 
                     <div class="map-box">
-                        <h4>Your delivery location</h4>
-                        <iframe id="deliveryMap" src="https://www.google.com/maps?q=Philippines&output=embed" loading="lazy"></iframe>
-                    </div>
-                    <div class="manual-location-box">
-                        <h4>Manual location</h4>
-                        <div class="inputBox">
-                            <span>latitude :</span>
-                            <input type="text" id="deliveryLatitude" placeholder="12.345678">
-                        </div>
-                        <div class="inputBox">
-                            <span>longitude :</span>
-                            <input type="text" id="deliveryLongitude" placeholder="98.765432">
-                        </div>
-                        <button type="button" class="location-btn" id="updateLocationBtn">Set location manually</button>
+                        <h4>Click the map to place your delivery location</h4>
+                        <div id="deliveryMap" class="leaflet-map"></div>
+                        <input type="hidden" id="deliveryLatitude">
+                        <input type="hidden" id="deliveryLongitude">
                     </div>
                 </div>
 
@@ -100,6 +91,7 @@
         </form>
     </div>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="delivery.js"></script>
 </body>
 </html>

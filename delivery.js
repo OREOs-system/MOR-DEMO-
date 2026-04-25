@@ -1,3 +1,6 @@
+let deliveryMap;
+let deliveryMarker;
+
 window.onload = function() {
     const storedUser = JSON.parse(localStorage.getItem('user'));
 
@@ -10,44 +13,40 @@ window.onload = function() {
         document.getElementById('deliveryState').value = storedUser.state || 'Philippines';
         document.getElementById('deliveryLatitude').value = storedUser.latitude || '';
         document.getElementById('deliveryLongitude').value = storedUser.longitude || '';
-        updateDeliveryMap();
-
-        document.getElementById('deliveryAddress').addEventListener('input', updateDeliveryMap);
-        document.getElementById('deliveryCity').addEventListener('input', updateDeliveryMap);
-        document.getElementById('deliveryZip').addEventListener('input', updateDeliveryMap);
-        document.getElementById('deliveryLatitude').addEventListener('input', updateDeliveryMap);
-        document.getElementById('deliveryLongitude').addEventListener('input', updateDeliveryMap);
-        document.getElementById('updateLocationBtn').addEventListener('click', setManualLocation);
+        initializeDeliveryMap(storedUser.latitude, storedUser.longitude);
     }
 };
 
-function updateDeliveryMap() {
-    const address = document.getElementById('deliveryAddress').value;
-    const city = document.getElementById('deliveryCity').value;
-    const zip = document.getElementById('deliveryZip').value;
-    const latitude = document.getElementById('deliveryLatitude').value.trim();
-    const longitude = document.getElementById('deliveryLongitude').value.trim();
+function initializeDeliveryMap(latitude, longitude) {
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
+    const defaultCenter = [14.5995, 120.9842];
+    const initialCenter = !isNaN(lat) && !isNaN(lng) ? [lat, lng] : defaultCenter;
+    const initialZoom = !isNaN(lat) && !isNaN(lng) ? 15 : 5;
 
-    let mapQuery;
-    if (latitude && longitude && !isNaN(latitude) && !isNaN(longitude)) {
-        mapQuery = `${latitude},${longitude}`;
-    } else {
-        mapQuery = [address, city, zip].filter(Boolean).join(', ') || 'Philippines';
+    deliveryMap = L.map('deliveryMap').setView(initialCenter, initialZoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(deliveryMap);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+        setDeliveryMarker(lat, lng, false);
     }
-    document.getElementById('deliveryMap').src = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+
+    deliveryMap.on('click', function(event) {
+        setDeliveryMarker(event.latlng.lat, event.latlng.lng, true);
+    });
 }
 
-function setManualLocation() {
-    const latitude = document.getElementById('deliveryLatitude').value.trim();
-    const longitude = document.getElementById('deliveryLongitude').value.trim();
-
-    if (!latitude || !longitude || isNaN(latitude) || isNaN(longitude)) {
-        alert('Please enter valid numeric latitude and longitude values.');
-        return;
+function setDeliveryMarker(lat, lng, save) {
+    if (deliveryMarker) {
+        deliveryMarker.setLatLng([lat, lng]);
+    } else {
+        deliveryMarker = L.marker([lat, lng]).addTo(deliveryMap);
     }
-
-    updateDeliveryMap();
-    alert('Manual location set. The map preview has been updated.');
+    deliveryMap.setView([lat, lng], 15);
+    document.getElementById('deliveryLatitude').value = lat.toFixed(6);
+    document.getElementById('deliveryLongitude').value = lng.toFixed(6);
 }
 
 function saveDeliveryAddress(event) {
@@ -73,6 +72,11 @@ function saveDeliveryAddress(event) {
     storedUser.state = state;
     storedUser.latitude = document.getElementById('deliveryLatitude').value.trim();
     storedUser.longitude = document.getElementById('deliveryLongitude').value.trim();
+
+    if (!storedUser.latitude || !storedUser.longitude) {
+        alert('Please place your delivery location on the map before proceeding.');
+        return;
+    }
 
     localStorage.setItem('user', JSON.stringify(storedUser));
 

@@ -1,21 +1,22 @@
+let accountMap;
+let accountMarker;
+
 window.onload = function() {
-    // Load stored user information
     const storedUser = JSON.parse(localStorage.getItem('user'));
 
     if (storedUser) {
-        // Display user information
-        document.getElementById('usernameDisplay').textContent = storedUser.username;
-        document.getElementById('emailDisplay').textContent = storedUser.email;
+        document.getElementById('usernameDisplay').textContent = storedUser.username || '';
+        document.getElementById('emailDisplay').textContent = storedUser.email || '';
         document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
         document.getElementById('addressDisplay').textContent = storedUser.address || 'No address saved';
         document.getElementById('cityDisplay').textContent = storedUser.city || 'N/A';
         document.getElementById('zipDisplay').textContent = storedUser.zipCode || 'N/A';
-        document.getElementById('latitudeDisplay').textContent = storedUser.latitude || '';
-        document.getElementById('longitudeDisplay').textContent = storedUser.longitude || '';
-        updateMap(storedUser.address, storedUser.city, storedUser.zipCode, storedUser.latitude, storedUser.longitude);
+        document.getElementById('latitudeDisplay').textContent = storedUser.latitude || 'Not set';
+        document.getElementById('longitudeDisplay').textContent = storedUser.longitude || 'Not set';
+        initializeAccountMap(storedUser.latitude, storedUser.longitude);
     } else {
         alert("You are not logged in.");
-        window.location.href = "login.html";  // Redirect to login page if not logged in
+        window.location.href = "login.html";
     }
 };
 
@@ -29,15 +30,44 @@ function saveUserChanges(updatedUser) {
     }
 }
 
-function updateMap(address, city, zipCode, latitude, longitude) {
-    let mapQuery;
-    if (latitude && longitude) {
-        mapQuery = `${latitude},${longitude}`;
-    } else {
-        mapQuery = [address, city, zipCode].filter(Boolean).join(', ') || 'Philippines';
+function initializeAccountMap(latitude, longitude) {
+    const lat = parseFloat(latitude);
+    const lng = parseFloat(longitude);
+    const defaultCenter = [14.5995, 120.9842];
+    const initialCenter = !isNaN(lat) && !isNaN(lng) ? [lat, lng] : defaultCenter;
+    const initialZoom = !isNaN(lat) && !isNaN(lng) ? 15 : 5;
+
+    accountMap = L.map('accountMap').setView(initialCenter, initialZoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(accountMap);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+        setAccountMarker(lat, lng, false);
     }
-    const query = encodeURIComponent(mapQuery);
-    document.getElementById('addressMap').src = `https://www.google.com/maps?q=${query}&output=embed`;
+
+    accountMap.on('click', function(event) {
+        setAccountMarker(event.latlng.lat, event.latlng.lng, true);
+    });
+}
+
+function setAccountMarker(lat, lng, save) {
+    if (accountMarker) {
+        accountMarker.setLatLng([lat, lng]);
+    } else {
+        accountMarker = L.marker([lat, lng]).addTo(accountMap);
+    }
+    accountMap.setView([lat, lng], 15);
+
+    document.getElementById('latitudeDisplay').textContent = lat.toFixed(6);
+    document.getElementById('longitudeDisplay').textContent = lng.toFixed(6);
+
+    if (save) {
+        const storedUser = JSON.parse(localStorage.getItem('user')) || {};
+        storedUser.latitude = lat.toString();
+        storedUser.longitude = lng.toString();
+        saveUserChanges(storedUser);
+    }
 }
 
 // Edit username
@@ -79,26 +109,8 @@ function editAddress() {
         document.getElementById('addressDisplay').textContent = newAddress;
         document.getElementById('cityDisplay').textContent = newCity;
         document.getElementById('zipDisplay').textContent = newZip;
-        updateMap(newAddress, newCity, newZip);
     } else {
         alert('Address, city, and zip code are required.');
-    }
-}
-
-function editLocation() {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    const newLatitude = prompt('Enter latitude:', storedUser.latitude || '');
-    const newLongitude = prompt('Enter longitude:', storedUser.longitude || '');
-
-    if (newLatitude && newLongitude && !isNaN(newLatitude) && !isNaN(newLongitude)) {
-        storedUser.latitude = newLatitude;
-        storedUser.longitude = newLongitude;
-        saveUserChanges(storedUser);
-        document.getElementById('latitudeDisplay').textContent = newLatitude;
-        document.getElementById('longitudeDisplay').textContent = newLongitude;
-        updateMap(storedUser.address, storedUser.city, storedUser.zipCode, newLatitude, newLongitude);
-    } else {
-        alert('Please enter valid latitude and longitude values.');
     }
 }
 

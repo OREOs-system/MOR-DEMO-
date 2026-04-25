@@ -79,11 +79,11 @@ img {
     margin-top: 15px;
 }
 
-.map-container iframe {
+.leaflet-map {
     width: 100%;
-    min-height: 300px;
-    border: 1px solid #ccc;
+    min-height: 320px;
     border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
 #twoFactorAuth {
