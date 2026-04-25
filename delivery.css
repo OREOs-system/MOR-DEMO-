@@ -236,6 +236,33 @@ input[type="radio"] {
     border-radius: 8px;
 }
 
+.manual-location-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.manual-location-box .inputBox {
+    margin-bottom: 12px;
+}
+
+.location-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ce871c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.location-btn:hover {
+    background-color: #b36012;
+}
+
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 30px;

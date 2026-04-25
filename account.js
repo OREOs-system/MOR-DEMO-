@@ -10,7 +10,9 @@ window.onload = function() {
         document.getElementById('addressDisplay').textContent = storedUser.address || 'No address saved';
         document.getElementById('cityDisplay').textContent = storedUser.city || 'N/A';
         document.getElementById('zipDisplay').textContent = storedUser.zipCode || 'N/A';
-        updateMap(storedUser.address, storedUser.city, storedUser.zipCode);
+        document.getElementById('latitudeDisplay').textContent = storedUser.latitude || '';
+        document.getElementById('longitudeDisplay').textContent = storedUser.longitude || '';
+        updateMap(storedUser.address, storedUser.city, storedUser.zipCode, storedUser.latitude, storedUser.longitude);
     } else {
         alert("You are not logged in.");
         window.location.href = "login.html";  // Redirect to login page if not logged in
@@ -27,8 +29,14 @@ function saveUserChanges(updatedUser) {
     }
 }
 
-function updateMap(address, city, zipCode) {
-    const query = encodeURIComponent([address, city, zipCode].filter(Boolean).join(', ') || 'Philippines');
+function updateMap(address, city, zipCode, latitude, longitude) {
+    let mapQuery;
+    if (latitude && longitude) {
+        mapQuery = `${latitude},${longitude}`;
+    } else {
+        mapQuery = [address, city, zipCode].filter(Boolean).join(', ') || 'Philippines';
+    }
+    const query = encodeURIComponent(mapQuery);
     document.getElementById('addressMap').src = `https://www.google.com/maps?q=${query}&output=embed`;
 }
 
@@ -74,6 +82,23 @@ function editAddress() {
         updateMap(newAddress, newCity, newZip);
     } else {
         alert('Address, city, and zip code are required.');
+    }
+}
+
+function editLocation() {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const newLatitude = prompt('Enter latitude:', storedUser.latitude || '');
+    const newLongitude = prompt('Enter longitude:', storedUser.longitude || '');
+
+    if (newLatitude && newLongitude && !isNaN(newLatitude) && !isNaN(newLongitude)) {
+        storedUser.latitude = newLatitude;
+        storedUser.longitude = newLongitude;
+        saveUserChanges(storedUser);
+        document.getElementById('latitudeDisplay').textContent = newLatitude;
+        document.getElementById('longitudeDisplay').textContent = newLongitude;
+        updateMap(storedUser.address, storedUser.city, storedUser.zipCode, newLatitude, newLongitude);
+    } else {
+        alert('Please enter valid latitude and longitude values.');
     }
 }
 

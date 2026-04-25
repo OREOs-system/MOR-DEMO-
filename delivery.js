@@ -8,11 +8,16 @@ window.onload = function() {
         document.getElementById('deliveryCity').value = storedUser.city || '';
         document.getElementById('deliveryZip').value = storedUser.zipCode || '';
         document.getElementById('deliveryState').value = storedUser.state || 'Philippines';
+        document.getElementById('deliveryLatitude').value = storedUser.latitude || '';
+        document.getElementById('deliveryLongitude').value = storedUser.longitude || '';
         updateDeliveryMap();
 
         document.getElementById('deliveryAddress').addEventListener('input', updateDeliveryMap);
         document.getElementById('deliveryCity').addEventListener('input', updateDeliveryMap);
         document.getElementById('deliveryZip').addEventListener('input', updateDeliveryMap);
+        document.getElementById('deliveryLatitude').addEventListener('input', updateDeliveryMap);
+        document.getElementById('deliveryLongitude').addEventListener('input', updateDeliveryMap);
+        document.getElementById('updateLocationBtn').addEventListener('click', setManualLocation);
     }
 };
 
@@ -20,8 +25,29 @@ function updateDeliveryMap() {
     const address = document.getElementById('deliveryAddress').value;
     const city = document.getElementById('deliveryCity').value;
     const zip = document.getElementById('deliveryZip').value;
-    const query = encodeURIComponent([address, city, zip].filter(Boolean).join(', ') || 'Philippines');
-    document.getElementById('deliveryMap').src = `https://www.google.com/maps?q=${query}&output=embed`;
+    const latitude = document.getElementById('deliveryLatitude').value.trim();
+    const longitude = document.getElementById('deliveryLongitude').value.trim();
+
+    let mapQuery;
+    if (latitude && longitude && !isNaN(latitude) && !isNaN(longitude)) {
+        mapQuery = `${latitude},${longitude}`;
+    } else {
+        mapQuery = [address, city, zip].filter(Boolean).join(', ') || 'Philippines';
+    }
+    document.getElementById('deliveryMap').src = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+}
+
+function setManualLocation() {
+    const latitude = document.getElementById('deliveryLatitude').value.trim();
+    const longitude = document.getElementById('deliveryLongitude').value.trim();
+
+    if (!latitude || !longitude || isNaN(latitude) || isNaN(longitude)) {
+        alert('Please enter valid numeric latitude and longitude values.');
+        return;
+    }
+
+    updateDeliveryMap();
+    alert('Manual location set. The map preview has been updated.');
 }
 
 function saveDeliveryAddress(event) {
@@ -45,6 +71,8 @@ function saveDeliveryAddress(event) {
     storedUser.city = city;
     storedUser.zipCode = zip;
     storedUser.state = state;
+    storedUser.latitude = document.getElementById('deliveryLatitude').value.trim();
+    storedUser.longitude = document.getElementById('deliveryLongitude').value.trim();
 
     localStorage.setItem('user', JSON.stringify(storedUser));
 
