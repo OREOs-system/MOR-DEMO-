@@ -71,14 +71,6 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    deliveryLatitude: {
-      type: Number,
-      default: null,
-    },
-    deliveryLongitude: {
-      type: Number,
-      default: null,
-    },
   },
   { timestamps: true }
 );
