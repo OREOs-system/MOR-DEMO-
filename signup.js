@@ -45,6 +45,9 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         password: password,
         role: 'user',
         profilePicture: 'default-profile.png',
+        address: '',
+        city: '',
+        contact: '',
         createdAt: new Date().toLocaleDateString()
     };
 
