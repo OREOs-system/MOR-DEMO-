@@ -75,17 +75,6 @@ img {
     margin-right: 10px;
 }
 
-.map-container {
-    margin-top: 15px;
-}
-
-.leaflet-map {
-    width: 100%;
-    min-height: 320px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
 #twoFactorAuth {
     margin-left: 10px;
 }

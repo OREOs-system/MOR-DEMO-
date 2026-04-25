@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="delivery.css">
 </head>
 <body>
@@ -21,48 +20,37 @@
     </section>
 
     <div class="container">
-        <form onsubmit="saveDeliveryAddress(event)">
+        <form action="">
             <div class="row">
                 <div class="col">
                     <h3 class="title"> Delivery address</h3>
 
                     <div class="inputBox">
                         <span>full name :</span>
-                        <input type="text" id="deliveryFullName" placeholder="john deo" required>
+                        <input type="text" placeholder="john deo" required>
                     </div>
                     <div class="inputBox">
                         <span>email :</span>
-                        <input type="email" id="deliveryEmail" placeholder="example@example.com" required>
+                        <input type="email" placeholder="example@example.com" required>
                     </div>
                     <div class="inputBox">
                         <span>address :</span>
-                        <input type="text" id="deliveryAddress" placeholder="Blk - street - locality" required>
+                        <input type="text" placeholder="Blk - street - locality" required>
                     </div>
                     <div class="inputBox">
                         <span>city :</span>
-                        <input type="text" id="deliveryCity" placeholder="" required>
+                        <input type="text" placeholder="" required>
                     </div>
 
                     <div class="flex">
                         <div class="inputBox">
                             <span>state :</span>
-                            <input type="text" id="deliveryState" value="Philippines" required>
+                            <input type="text" placeholder="Philippines" required>
                         </div>
                         <div class="inputBox">
                             <span>zip code :</span>
-                            <input type="text" id="deliveryZip" placeholder="123 456" required>
+                            <input type="text" placeholder="123 456" required>
                         </div>
-                    </div>
-
-                    <div class="map-box">
-                        <h4>📍 Set Your Delivery Location on Map</h4>
-                        <p class="map-instruction">Click on the map to place your delivery pin. You can drag the marker to adjust the location.</p>
-                        <div id="deliveryMap" class="leaflet-map"></div>
-                        <div class="location-info">
-                            <span id="coordinatesDisplay">Location not set</span>
-                        </div>
-                        <input type="hidden" id="deliveryLatitude">
-                        <input type="hidden" id="deliveryLongitude">
                     </div>
                 </div>
 
@@ -95,7 +83,5 @@
         </form>
     </div>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="delivery.js"></script>
 </body>
 </html>

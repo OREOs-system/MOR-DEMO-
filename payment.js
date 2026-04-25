@@ -61,25 +61,13 @@ function processSuccessfulPayment(gcashNumber, amount, reference) {
     // Simulate successful payment
     alert('Payment successful! Processing your order...');
 
-    // Get user delivery information
-    const user = JSON.parse(localStorage.getItem('user')) || {};
-    const username = user.username || localStorage.getItem('username');
-    const email = user.email || localStorage.getItem('email');
-    const deliveryAddress = user.address || '';
-    const deliveryCity = user.city || '';
-    const deliveryZip = user.zipCode || '';
-    const latitude = user.latitude || null;
-    const longitude = user.longitude || null;
+    // Now place the order (similar to original checkout function)
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
 
     if (!username || !email) {
         alert('User information not found. Please login again.');
         window.location.href = 'login.html';
-        return;
-    }
-
-    if (!latitude || !longitude) {
-        alert('Delivery location not set. Please complete delivery address first.');
-        window.location.href = 'delivery.html';
         return;
     }
 
@@ -100,12 +88,7 @@ function processSuccessfulPayment(gcashNumber, amount, reference) {
             paymentMethod: 'GCash',
             gcashNumber: gcashNumber,
             paymentReference: reference || 'N/A',
-            paymentAmount: amount,
-            deliveryAddress: deliveryAddress,
-            deliveryCity: deliveryCity,
-            deliveryZip: deliveryZip,
-            latitude: latitude,
-            longitude: longitude
+            paymentAmount: amount
         });
     });
 
@@ -135,19 +118,6 @@ function cancelPayment() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if coming from delivery page with payment method
-    const paymentMethod = sessionStorage.getItem('paymentMethod');
-    
-    if (paymentMethod === 'cash') {
-        // If somehow we got here with COD selected, redirect back
-        alert('Please complete your delivery address information.');
-        window.location.href = 'delivery.html';
-        return;
-    }
-    
-    // Clear payment method from session
-    sessionStorage.removeItem('paymentMethod');
-    
     if (cart.length === 0) {
         alert('No items to pay for. Redirecting to cart.');
         window.location.href = 'cart.html';
