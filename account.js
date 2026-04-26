@@ -92,15 +92,19 @@ function editCity() {
 
 // Edit contact number
 function editContact() {
-    const newContact = prompt("Enter your contact number:");
+    const newContact = prompt("Enter your contact number (11 digits only):");
     if (newContact !== null) {
-        // Update contact and save to localStorage
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        storedUser.contact = newContact;
-        localStorage.setItem('user', JSON.stringify(storedUser));
+        if (validateContact(newContact)) {
+            // Update contact and save to localStorage
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            storedUser.contact = newContact;
+            localStorage.setItem('user', JSON.stringify(storedUser));
 
-        // Update the displayed contact
-        document.getElementById('contactDisplay').textContent = newContact;
+            // Update the displayed contact
+            document.getElementById('contactDisplay').textContent = newContact;
+        } else {
+            alert("Please enter a valid 11-digit contact number (numbers only).");
+        }
     }
 }
 
@@ -141,6 +145,12 @@ function logout() {
 function validateEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
+}
+
+// Contact number validation helper function
+function validateContact(contact) {
+    const regex = /^\d{11}$/;
+    return regex.test(contact);
 }
 
 // Save changes function
