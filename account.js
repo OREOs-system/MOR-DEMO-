@@ -1,36 +1,20 @@
-window.onload = async function() {
-    const token = localStorage.getItem('token');
-    if (!token) {
+window.onload = function() {
+    // Load stored user information
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
+    if (storedUser) {
+        // Display user information
+        document.getElementById('usernameDisplay').textContent = storedUser.username;
+        document.getElementById('emailDisplay').textContent = storedUser.email;
+        document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
+        
+        // Display address information
+        document.getElementById('addressDisplay').textContent = storedUser.address || 'Not set';
+        document.getElementById('cityDisplay').textContent = storedUser.city || 'Not set';
+        document.getElementById('contactDisplay').textContent = storedUser.contact || 'Not set';
+    } else {
         alert("You are not logged in.");
-        window.location.href = "login.html";
-        return;
-    }
-
-    try {
-        const response = await fetch('/api/auth/profile', {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-        });
-
-        if (response.ok) {
-            const user = await response.json();
-            // Display user information
-            document.getElementById('usernameDisplay').textContent = user.firstName + ' ' + user.lastName;
-            document.getElementById('emailDisplay').textContent = user.email;
-            document.getElementById('profilePic').src = user.profilePicture || 'default-profile.png';
-            
-            // Display address information
-            document.getElementById('addressDisplay').textContent = user.address || 'N/A';
-            document.getElementById('cityDisplay').textContent = user.city || 'N/A';
-            document.getElementById('contactDisplay').textContent = user.contact || 'N/A';
-        } else {
-            alert("Failed to load user data.");
-            window.location.href = "login.html";
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert("An error occurred while loading user data.");
+        window.location.href = "login.html";  // Redirect to login page if not logged in
     }
 };
 
@@ -79,96 +63,45 @@ function changePicture() {
 }
 
 // Edit address
-async function editAddress() {
+function editAddress() {
     const newAddress = prompt("Enter your address:");
     if (newAddress !== null) {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch('/api/auth/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ address: newAddress }),
-            });
+        // Update address and save to localStorage
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        storedUser.address = newAddress;
+        localStorage.setItem('user', JSON.stringify(storedUser));
 
-            if (response.ok) {
-                const user = await response.json();
-                // Update localStorage
-                localStorage.setItem('user', JSON.stringify(user));
-                // Update the displayed address
-                document.getElementById('addressDisplay').textContent = newAddress;
-            } else {
-                alert("Failed to update address.");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert("An error occurred while updating address.");
-        }
+        // Update the displayed address
+        document.getElementById('addressDisplay').textContent = newAddress;
     }
 }
 
 // Edit city
-async function editCity() {
+function editCity() {
     const newCity = prompt("Enter your city:");
     if (newCity !== null) {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch('/api/auth/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ city: newCity }),
-            });
+        // Update city and save to localStorage
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        storedUser.city = newCity;
+        localStorage.setItem('user', JSON.stringify(storedUser));
 
-            if (response.ok) {
-                const user = await response.json();
-                // Update localStorage
-                localStorage.setItem('user', JSON.stringify(user));
-                // Update the displayed city
-                document.getElementById('cityDisplay').textContent = newCity;
-            } else {
-                alert("Failed to update city.");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert("An error occurred while updating city.");
-        }
+        // Update the displayed city
+        document.getElementById('cityDisplay').textContent = newCity;
     }
 }
 
 // Edit contact number
-async function editContact() {
+function editContact() {
     const newContact = prompt("Enter your contact number (11 digits only):");
     if (newContact !== null) {
         if (validateContact(newContact)) {
-            const token = localStorage.getItem('token');
-            try {
-                const response = await fetch('/api/auth/profile', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                    body: JSON.stringify({ contact: newContact }),
-                });
+            // Update contact and save to localStorage
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+            storedUser.contact = newContact;
+            localStorage.setItem('user', JSON.stringify(storedUser));
 
-                if (response.ok) {
-                    const user = await response.json();
-                    // Update localStorage
-                    localStorage.setItem('user', JSON.stringify(user));
-                    // Update the displayed contact
-                    document.getElementById('contactDisplay').textContent = newContact;
-                } else {
-                    alert("Failed to update contact.");
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert("An error occurred while updating contact.");
-            }
+            // Update the displayed contact
+            document.getElementById('contactDisplay').textContent = newContact;
         } else {
             alert("Please enter a valid 11-digit contact number (numbers only).");
         }
@@ -204,7 +137,6 @@ function changePassword() {
 // Logout functionality
 function logout() {
     localStorage.removeItem('user');  // Remove user data from localStorage
-    localStorage.removeItem('token');  // Remove token
     alert('SUCCESSFULLY');
     window.location.href = 'login.html';  // Redirect to login page after logout
 }
