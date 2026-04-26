@@ -36,10 +36,10 @@ router.get('/:id', requireAdmin, async (req, res) => {
 // Update user
 router.put('/:id', requireAdmin, async (req, res) => {
   try {
-    const { firstName, lastName, phone, address, city, zipCode, role } = req.body;
+    const { firstName, lastName, contact, address, city, zipCode, role } = req.body;
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      { firstName, lastName, phone, address, city, zipCode, role },
+      { firstName, lastName, contact, address, city, zipCode, role },
       { new: true }
     ).select('-password');
     if (!user) {

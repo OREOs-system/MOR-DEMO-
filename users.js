@@ -61,6 +61,8 @@ function displayUsers() {
             </div>
             <div class="user-meta">
                 <p><strong>User ID:</strong> ${user._id}</p>
+                <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
                 <p><strong>Joined:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
                 <p><strong>Status:</strong> <span class="status-badge status-active">Active</span></p>
             </div>
@@ -85,7 +87,7 @@ function viewUserDetails(userId) {
                 <div class="details-right">
                     <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                    <p><strong>Phone:</strong> ${user.contactct || 'Not provided'}</p>
                     <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
                     <p><strong>City:</strong> ${user.city || 'Not provided'}</p>
                     <p><strong>Zip Code:</strong> ${user.zipCode || 'Not provided'}</p>
@@ -133,7 +135,7 @@ async function saveUser(event) {
     const firstName = document.getElementById('modalFirstName').value.trim();
     const lastName = document.getElementById('modalLastName').value.trim();
     const email = document.getElementById('modalEmail').value.trim();
-    const phone = document.getElementById('modalPhone').value.trim();
+    const contact = document.getElementById('modalPhone').value.trim();
     const address = document.getElementById('modalAddress').value.trim();
     const city = document.getElementById('modalCity').value.trim();
     const zipCode = document.getElementById('modalZipCode').value.trim();
