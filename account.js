@@ -146,4 +146,5 @@ function validateEmail(email) {
 // Save changes function
 function saveChanges() {
     alert("Account settings saved successfully!");
+    window.location.href = "mainpage.html";
 }
