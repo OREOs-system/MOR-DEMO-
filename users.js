@@ -1,10 +1,20 @@
 // Users Management System
 let allUsers = [];
-let editingUserId = null;
 
-// Initialize users from localStorage
-function initializeUsers() {
-    allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
+// Initialize users from API
+async function initializeUsers() {
+    try {
+        const response = await fetch('/api/users');
+        if (response.ok) {
+            allUsers = await response.json();
+        } else {
+            console.error('Failed to fetch users');
+            allUsers = [];
+        }
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        allUsers = [];
+    }
     displayUsers();
     updateStats();
 }
@@ -15,7 +25,8 @@ function displayUsers() {
     const roleFilter = document.getElementById('filterRole').value;
     
     let filteredUsers = allUsers.filter(user => {
-        const matchesSearch = user.username.toLowerCase().includes(searchTerm) || 
+        const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+        const matchesSearch = fullName.includes(searchTerm) || 
                              user.email.toLowerCase().includes(searchTerm);
         const matchesRole = roleFilter === 'all' || user.role === roleFilter;
         return matchesSearch && matchesRole;
@@ -35,22 +46,22 @@ function displayUsers() {
         userCard.innerHTML = `
             <div class="user-card-header">
                 <div class="user-profile">
-                    <img src="${user.profilePicture || 'default-profile.png'}" alt="${user.username}" class="user-avatar">
+                    <img src="${user.profilePicture || 'default-profile.png'}" alt="${user.firstName} ${user.lastName}" class="user-avatar">
                     <div class="user-basic-info">
-                        <h3>${user.username}</h3>
+                        <h3>${user.firstName} ${user.lastName}</h3>
                         <p>${user.email}</p>
-                        <span class="role-badge role-${user.role}">${user.role === 'admin' ? '👑 Admin' : '👤 User'}</span>
+                        <span class="role-badge role-${user.role}">${user.role === 'admin' ? '👑 Admin' : '👤 Customer'}</span>
                     </div>
                 </div>
                 <div class="user-actions">
-                    <button class="btn-view" onclick="viewUserDetails('${user.user_id}')">👁️ View</button>
-                    <button class="btn-edit" onclick="editUser('${user.user_id}')">✏️ Edit</button>
-                    <button class="btn-delete" onclick="deleteUser('${user.user_id}')">🗑️ Delete</button>
+                    <button class="btn-view" onclick="viewUserDetails('${user._id}')">👁️ View</button>
+                    <button class="btn-edit" onclick="editUser('${user._id}')">✏️ Edit</button>
+                    <button class="btn-delete" onclick="deleteUser('${user._id}')">🗑️ Delete</button>
                 </div>
             </div>
             <div class="user-meta">
-                <p><strong>User ID:</strong> ${user.user_id}</p>
-                <p><strong>Joined:</strong> ${user.createdAt || 'N/A'}</p>
+                <p><strong>User ID:</strong> ${user._id}</p>
+                <p><strong>Joined:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
                 <p><strong>Status:</strong> <span class="status-badge status-active">Active</span></p>
             </div>
         `;
@@ -60,7 +71,7 @@ function displayUsers() {
 
 // View user details
 function viewUserDetails(userId) {
-    const user = allUsers.find(u => u.user_id === userId);
+    const user = allUsers.find(u => u._id === userId);
     if (!user) return;
 
     const detailsContent = document.getElementById('userDetails');
@@ -69,16 +80,18 @@ function viewUserDetails(userId) {
             <h2>User Details</h2>
             <div class="details-content">
                 <div class="details-left">
-                    <img src="${user.profilePicture || 'default-profile.png'}" alt="${user.username}" class="details-avatar">
+                    <img src="${user.profilePicture || 'default-profile.png'}" alt="${user.firstName} ${user.lastName}" class="details-avatar">
                 </div>
                 <div class="details-right">
-                    <p><strong>Username:</strong> ${user.username}</p>
+                    <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>User ID:</strong> ${user.user_id}</p>
-                    <p><strong>Role:</strong> ${user.role === 'admin' ? '👑 Admin' : '👤 User'}</p>
-                    <p><strong>Created:</strong> ${user.createdAt || 'N/A'}</p>
-                    <p><strong>Profile Picture URL:</strong> ${user.profilePicture || 'None'}</p>
-                    <p><strong>Password (Hashed):</strong> ${user.password ? '*'.repeat(user.password.length) : 'N/A'}</p>
+                    <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                    <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
+                    <p><strong>City:</strong> ${user.city || 'Not provided'}</p>
+                    <p><strong>Zip Code:</strong> ${user.zipCode || 'Not provided'}</p>
+                    <p><strong>User ID:</strong> ${user._id}</p>
+                    <p><strong>Role:</strong> ${user.role === 'admin' ? '👑 Admin' : '👤 Customer'}</p>
+                    <p><strong>Created:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
                 </div>
             </div>
             <div class="details-actions">
@@ -93,34 +106,42 @@ function viewUserDetails(userId) {
 // Edit user
 function editUser(userId) {
     editingUserId = userId;
-    const user = allUsers.find(u => u.user_id === userId);
+    const user = allUsers.find(u => u._id === userId);
     if (!user) return;
 
     document.getElementById('modalTitle').innerText = 'Edit User';
-    document.getElementById('modalUsername').value = user.username;
+    document.getElementById('modalFirstName').value = user.firstName;
+    document.getElementById('modalLastName').value = user.lastName;
     document.getElementById('modalEmail').value = user.email;
-    document.getElementById('modalPassword').value = user.password;
+    document.getElementById('modalPhone').value = user.phone || '';
+    document.getElementById('modalAddress').value = user.address || '';
+    document.getElementById('modalCity').value = user.city || '';
+    document.getElementById('modalZipCode').value = user.zipCode || '';
+    document.getElementById('modalPassword').value = '';
     document.getElementById('modalPassword').placeholder = 'Leave blank to keep current password';
     document.getElementById('modalPassword').required = false;
     document.getElementById('modalRole').value = user.role;
-    document.getElementById('modalProfilePic').value = user.profilePicture || '';
 
     closeDetailsModal();
     document.getElementById('userModal').style.display = 'block';
 }
 
 // Save user (add or update)
-function saveUser(event) {
+async function saveUser(event) {
     event.preventDefault();
 
-    const username = document.getElementById('modalUsername').value.trim();
+    const firstName = document.getElementById('modalFirstName').value.trim();
+    const lastName = document.getElementById('modalLastName').value.trim();
     const email = document.getElementById('modalEmail').value.trim();
+    const phone = document.getElementById('modalPhone').value.trim();
+    const address = document.getElementById('modalAddress').value.trim();
+    const city = document.getElementById('modalCity').value.trim();
+    const zipCode = document.getElementById('modalZipCode').value.trim();
     const password = document.getElementById('modalPassword').value.trim();
     const role = document.getElementById('modalRole').value;
-    const profilePicture = document.getElementById('modalProfilePic').value.trim();
 
     // Validation
-    if (!username || !email || (!editingUserId && !password)) {
+    if (!firstName || !lastName || !email || (!editingUserId && !password)) {
         alert('Please fill in all required fields');
         return;
     }
@@ -130,55 +151,74 @@ function saveUser(event) {
         return;
     }
 
-    if (editingUserId) {
-        // Update existing user
-        const userIndex = allUsers.findIndex(u => u.user_id === editingUserId);
-        if (userIndex !== -1) {
-            allUsers[userIndex].username = username;
-            allUsers[userIndex].email = email;
-            if (password) allUsers[userIndex].password = password;
-            allUsers[userIndex].role = role;
-            allUsers[userIndex].profilePicture = profilePicture || 'default-profile.png';
-            alert('User updated successfully');
-            editingUserId = null;
-        }
-    } else {
-        // Add new user
-        // Check if email already exists
-        if (allUsers.some(u => u.email === email)) {
-            alert('Email already exists');
+    const userData = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        city,
+        zipCode,
+        role
+    };
+
+    if (password) {
+        userData.password = password;
+    }
+
+    try {
+        let response;
+        if (editingUserId) {
+            // Update existing user
+            response = await fetch(`/api/users/${editingUserId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+        } else {
+            // Add new user - but we don't have a POST route for admin adding users
+            // For now, we'll just alert that adding users is not implemented
+            alert('Adding new users via admin panel is not implemented yet. Users should register themselves.');
             return;
         }
 
-        const newUser = {
-            user_id: 'USER_' + Date.now(),
-            username: username,
-            email: email,
-            password: password,
-            role: role,
-            profilePicture: profilePicture || 'default-profile.png',
-            createdAt: new Date().toLocaleDateString()
-        };
-
-        allUsers.push(newUser);
-        alert('User added successfully');
+        if (response.ok) {
+            alert(editingUserId ? 'User updated successfully' : 'User added successfully');
+            editingUserId = null;
+            await initializeUsers(); // Refresh the list
+            closeUserModal();
+            document.getElementById('userForm').reset();
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.message}`);
+        }
+    } catch (error) {
+        console.error('Error saving user:', error);
+        alert('Error saving user');
     }
-
-    localStorage.setItem('allUsers', JSON.stringify(allUsers));
-    displayUsers();
-    updateStats();
-    closeUserModal();
-    document.getElementById('userForm').reset();
 }
 
 // Delete user
-function deleteUser(userId) {
+async function deleteUser(userId) {
     if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
-        allUsers = allUsers.filter(u => u.user_id !== userId);
-        localStorage.setItem('allUsers', JSON.stringify(allUsers));
-        displayUsers();
-        updateStats();
-        alert('User deleted successfully');
+        try {
+            const response = await fetch(`/api/users/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert('User deleted successfully');
+                await initializeUsers(); // Refresh the list
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.message}`);
+            }
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            alert('Error deleting user');
+        }
     }
 }
 
