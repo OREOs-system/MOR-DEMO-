@@ -142,3 +142,8 @@ function validateEmail(email) {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
 }
+
+// Save changes function
+function saveChanges() {
+    alert("Account settings saved successfully!");
+}
