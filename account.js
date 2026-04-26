@@ -127,13 +127,13 @@ function changePassword() {
     storedUser.password = newPassword;
     localStorage.setItem('user', JSON.stringify(storedUser));
 
-    alert("Password changed successfully.");
+    alert("SUCCESSFULLY");
 }
 
 // Logout functionality
 function logout() {
     localStorage.removeItem('user');  // Remove user data from localStorage
-    alert('You have been logged out successfully.');
+    alert('SUCCESSFULLY');
     window.location.href = 'login.html';  // Redirect to login page after logout
 }
 
@@ -145,6 +145,6 @@ function validateEmail(email) {
 
 // Save changes function
 function saveChanges() {
-    alert("Account settings saved successfully!");
+    alert("SUCCESSFULLY");
     window.location.href = "mainpage.html";
 }
