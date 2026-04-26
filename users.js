@@ -87,7 +87,7 @@ function viewUserDetails(userId) {
                 <div class="details-right">
                     <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Phone:</strong> ${user.contactct || 'Not provided'}</p>
+                    <p><strong>Phone:</strong> ${user.contact || 'Not provided'}</p>
                     <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
                     <p><strong>City:</strong> ${user.city || 'Not provided'}</p>
                     <p><strong>Zip Code:</strong> ${user.zipCode || 'Not provided'}</p>
