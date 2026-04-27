@@ -66,8 +66,8 @@ function displayOrders() {
                         <h3>Order #${orderId}</h3>
                         <p>Customer: ${firstOrder.name || 'N/A'}</p>
                         <p>Email: ${firstOrder.email || 'N/A'}</p>
-                        <p>Address: ${firstOrder.address || 'N/A'}</p>
-                        <p>Contact: ${firstOrder.contact || 'N/A'}</p>
+                        <p>Address: ${firstOrder.address || firstOrder.deliveryAddress || 'N/A'}</p>
+                        <p>Contact: ${firstOrder.contact || firstOrder.phone || 'N/A'}</p>
                         <p>Date: ${firstOrder.date || 'N/A'}</p>
                     </div>
                     <div class="status-badge ${statusInfo.class}">

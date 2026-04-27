@@ -9,7 +9,6 @@ window.onload = function() {
         document.getElementById('deliveryEmail').value = storedUser.email || '';
         document.getElementById('deliveryAddress').value = storedUser.address || '';
         document.getElementById('deliveryCity').value = storedUser.city || '';
-        document.getElementById('deliveryZip').value = storedUser.zipCode || '';
         document.getElementById('deliveryState').value = storedUser.state || 'Philippines';
         document.getElementById('deliveryLatitude').value = storedUser.latitude || '';
         document.getElementById('deliveryLongitude').value = storedUser.longitude || '';
@@ -80,12 +79,11 @@ function saveDeliveryAddress(event) {
     const email = document.getElementById('deliveryEmail').value.trim();
     const address = document.getElementById('deliveryAddress').value.trim();
     const city = document.getElementById('deliveryCity').value.trim();
-    const zip = document.getElementById('deliveryZip').value.trim();
     const state = document.getElementById('deliveryState').value.trim();
     const latitude = document.getElementById('deliveryLatitude').value.trim();
     const longitude = document.getElementById('deliveryLongitude').value.trim();
 
-    if (!fullName || !email || !address || !city || !zip) {
+    if (!fullName || !email || !address || !city) {
         alert('Please complete your delivery address information before proceeding.');
         return;
     }
@@ -100,7 +98,6 @@ function saveDeliveryAddress(event) {
     storedUser.email = email;
     storedUser.address = address;
     storedUser.city = city;
-    storedUser.zipCode = zip;
     storedUser.state = state;
     storedUser.latitude = parseFloat(latitude);
     storedUser.longitude = parseFloat(longitude);
@@ -161,6 +158,9 @@ function processCODPayment() {
             orderId,
             name: username,
             email: email,
+            address: user.address || user.deliveryAddress || '',
+            city: user.city || user.deliveryCity || '',
+            contact: user.contact || '',
             date: currentDate,
             product: item.name,
             quantity: item.quantity,
@@ -168,14 +168,10 @@ function processCODPayment() {
             status: 'new',
             paymentMethod: 'Cash on Delivery',
             paymentAmount: item.price,
-            deliveryAddress: user.address || '',
-            deliveryCity: user.city || '',
-            deliveryZip: user.zipCode || '',
             latitude: user.latitude,
             longitude: user.longitude
         });
     });
-
     localStorage.setItem('orders', JSON.stringify(orders));
     sessionStorage.setItem('recentOrderTime', Date.now().toString());
 
