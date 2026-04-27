@@ -61,7 +61,7 @@ function displayUsers() {
             </div>
             <div class="user-meta">
                 <p><strong>User ID:</strong> ${user._id}</p>
-                <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                <p><strong>Phone:</strong> ${user.contact || 'Not provided'}</p>
                 <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
                 <p><strong>Joined:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
                 <p><strong>Status:</strong> <span class="status-badge status-active">Active</span></p>
@@ -87,7 +87,7 @@ function viewUserDetails(userId) {
                 <div class="details-right">
                     <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
                     <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Phone:</strong> ${user.contactct || 'Not provided'}</p>
+                    <p><strong>Phone:</strong> ${user.contact || 'Not provided'}</p>
                     <p><strong>Address:</strong> ${user.address || 'Not provided'}</p>
                     <p><strong>City:</strong> ${user.city || 'Not provided'}</p>
                     <p><strong>Zip Code:</strong> ${user.zipCode || 'Not provided'}</p>
@@ -115,7 +115,7 @@ function editUser(userId) {
     document.getElementById('modalFirstName').value = user.firstName;
     document.getElementById('modalLastName').value = user.lastName;
     document.getElementById('modalEmail').value = user.email;
-    document.getElementById('modalPhone').value = user.phone || '';
+    document.getElementById('modalPhone').value = user.contact || '';
     document.getElementById('modalAddress').value = user.address || '';
     document.getElementById('modalCity').value = user.city || '';
     document.getElementById('modalZipCode').value = user.zipCode || '';
@@ -157,7 +157,7 @@ async function saveUser(event) {
         firstName,
         lastName,
         email,
-        phone,
+        contact,
         address,
         city,
         zipCode,
