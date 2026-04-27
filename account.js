@@ -1,39 +1,10 @@
-window.onload = async function() {
-    // Try to load user information from server first
-    const token = localStorage.getItem('token');
-    if (token) {
-        try {
-            const response = await fetch('/api/auth/profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (response.ok) {
-                const user = await response.json();
-                // Display user information
-                document.getElementById('usernameDisplay').textContent = `${user.firstName} ${user.lastName}`;
-                document.getElementById('emailDisplay').textContent = user.email;
-                document.getElementById('profilePic').src = user.profilePicture || 'default-profile.png';
-                
-                // Display address information
-                document.getElementById('addressDisplay').textContent = user.address || 'Not set';
-                document.getElementById('cityDisplay').textContent = user.city || 'Not set';
-                document.getElementById('contactDisplay').textContent = user.contact || 'Not set';
-
-                // Store user data locally for editing
-                localStorage.setItem('user', JSON.stringify(user));
-                return;
-            }
-        } catch (error) {
-            console.error('Error fetching user profile:', error);
-        }
-    }
-
-    // Fallback to localStorage
+window.onload = function() {
+    // Load stored user information
     const storedUser = JSON.parse(localStorage.getItem('user'));
+
     if (storedUser) {
         // Display user information
-        document.getElementById('usernameDisplay').textContent = storedUser.username || `${storedUser.firstName} ${storedUser.lastName}`;
+        document.getElementById('usernameDisplay').textContent = storedUser.username;
         document.getElementById('emailDisplay').textContent = storedUser.email;
         document.getElementById('profilePic').src = storedUser.profilePicture || 'default-profile.png';
         
@@ -183,44 +154,7 @@ function validateContact(contact) {
 }
 
 // Save changes function
-async function saveChanges() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        alert("Not authenticated. Please log in again.");
-        return;
-    }
-
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (!storedUser) {
-        alert("No user data found.");
-        return;
-    }
-
-    try {
-        const response = await fetch('/api/auth/profile', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                firstName: storedUser.firstName,
-                lastName: storedUser.lastName,
-                contact: storedUser.contact,
-                address: storedUser.address,
-                city: storedUser.city,
-                zipCode: storedUser.zipCode
-            })
-        });
-
-        if (response.ok) {
-            alert("Changes saved successfully!");
-            window.location.href = "mainpage.html";
-        } else {
-            alert("Failed to save changes.");
-        }
-    } catch (error) {
-        console.error('Error saving changes:', error);
-        alert("Error saving changes.");
-    }
+function saveChanges() {
+    alert("SUCCESSFULLY");
+    window.location.href = "mainpage.html";
 }
