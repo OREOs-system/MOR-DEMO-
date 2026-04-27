@@ -1,4 +1,4 @@
-document.getElementById('registerForm').addEventListener('submit', function(event) {
+document.getElementById('registerForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent form from submitting normally
 
     // Get values from the form fields
@@ -30,40 +30,41 @@ document.getElementById('registerForm').addEventListener('submit', function(even
         return;
     }
 
-    // Get existing users array
-    let allUsers = JSON.parse(localStorage.getItem('allUsers')) || [];
-    
-    // Check if email already exists
-    if (allUsers.some(u => u.email === email)) {
-        errorMessage.textContent = 'Email already registered!';
-        return;
+    // Split username into firstName and lastName (assuming space separated)
+    const nameParts = username.trim().split(' ');
+    const firstName = nameParts[0] || username;
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                firstName,
+                lastName,
+                phone: contact, // API expects phone
+                address,
+                city,
+                zipCode: '' // Not in form, set empty
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Registration successful! Please login.');
+            window.location.href = 'login.html';
+        } else {
+            errorMessage.textContent = data.message || 'Registration failed';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        errorMessage.textContent = 'An error occurred. Please try again.';
     }
-
-    // Generate a simple user_id and create new user
-    const user_id = 'USER_' + Date.now();
-    const newUser = {
-        user_id: user_id,
-        username: username,
-        email: email,
-        password: password,
-        role: 'user',
-        profilePicture: 'default-profile.png',
-        address: address,
-        city: city,
-        contact: contact,
-        createdAt: new Date().toLocaleDateString()
-    };
-
-    // Add to users array
-    allUsers.push(newUser);
-    localStorage.setItem('allUsers', JSON.stringify(allUsers));
-    
-    // Also set current user for login
-    localStorage.setItem('user', JSON.stringify(newUser));
-
-    // Redirect to login page or success message
-    alert('Registration successful! Please login.');
-    window.location.href = 'login.html';  // Redirect to login page
 });
 
 // Helper function to validate email format
